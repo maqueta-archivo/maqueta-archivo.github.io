@@ -1,0 +1,82 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+</head>
+
+<body>
+  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+    <a-assets>
+      <a-asset-item id="pamplonaModel" src="./Pamplona_3D_Test.glb"></a-asset-item>
+      <a-asset-item id="pamplonaModelObj" src="./Pamplona_3D_V01.obj"></a-asset-item>
+      <a-asset-item id="pamplonaModelMtl" src="./Pamplona_3D_V01.mtl"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-obj-model id="maqueta" rotation="90 0 0 " position="0 0.1 0" scale="10 10 10" src="#pamplonaModelObj"
+        material="src: ./Pamplona_3D_Color2.jpg; opacity: 0.75; offset: 0 0.5; emissive: #6CFFFF; emissiveIntensity: 1"></a-obj-model>
+    </a-entity>
+  </a-scene>
+  <!-- <script>
+    let offset_update = 0.01;
+    setInterval(() => {
+      let new_offset = document.getElementById("maqueta").components.material.material.map.offset.y + offset_update;
+      document.getElementById("maqueta").components.material.material.map.offset.y = new_offset;
+      if(new_offset >= 0.5 || new_offset <= -0.5){
+        offset_update = -1 * offset_update;
+      }
+    },5);
+  
+  </script> -->
+  <script>
+    let offset_update = 0.01;
+    let min_emissive = 0;
+    let max_emissive = 1;
+    let min_offset = -1;
+    let max_offset = 1;
+    function mapRange(current, in_min, in_max, out_min, out_max){
+      let scale = (out_max-out_min)/(in_max-in_min)
+      let offset = -in_min*(out_max-out_min)/(in_max-in_min) + out_min
+      return current*scale + offset
+    }
+    setInterval(() => {
+      if(!document.getElementById("maqueta").components.material || !document.getElementById("maqueta").components.material.material || !document.getElementById("maqueta").components.material.material.map)
+        return;
+      let new_offset = document.getElementById("maqueta").components.material.material.map.offset.y - offset_update;
+      
+      if(new_offset <= min_offset){
+        new_offset = max_offset;
+      }
+      
+      document.getElementById("maqueta").components.material.material.map.offset.y = new_offset;
+
+      let new_emissive = 0;
+      if(new_offset <= 0){
+        new_emissive = mapRange(new_offset, -1, 0, 0, 1);
+      }else{
+        new_emissive = mapRange(new_offset, 0,1, 1,0);
+      }
+
+      if(new_emissive > 1)
+        new_emissive = 1;
+      if(new_emissive < 0)
+        new_emissive = 0;
+      document.getElementById("maqueta").components.material.material.emissiveIntensity = new_emissive;
+    },5);
+  
+  </script>
+</body>
+
+
+
+</html>
+
+<!-- animation="property: offset; to: 0 0.5; loop: true; dur: 1000" -->
