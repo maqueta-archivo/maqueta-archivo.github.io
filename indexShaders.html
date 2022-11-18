@@ -36,7 +36,6 @@
   
   </script> -->
   <script>
-    document.getElementById("scene").components.inspector.openInspector()
     let offset_update = 0.01;
     let min_emissive = 0;
     let max_emissive = 1;
@@ -71,7 +70,7 @@
         new_emissive = 0;
       document.getElementById("maqueta").components.material.material.emissiveIntensity = new_emissive;
     },5);
-  
+    setTimeout(()=> {document.getElementById("scene").components.inspector.openInspector();},2000);
   </script>
 </body>
 
