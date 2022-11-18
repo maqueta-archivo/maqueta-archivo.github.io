@@ -9,9 +9,10 @@
 </head>
 
 <body>
-  <a-scene mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB"
+  <a-scene id="scene" mindar-image="imageTargetSrc: ./targets.mind;" color-space="sRGB"
     renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false">
+    device-orientation-permission-ui="enabled: false"
+    stats >
     <a-assets>
       <a-asset-item id="pamplonaModelObj" src="./Pamplona_3D_V01.obj"></a-asset-item>
     </a-assets>
@@ -35,6 +36,7 @@
   
   </script> -->
   <script>
+    document.getElementById("scene").components.inspector.openInspector()
     let offset_update = 0.01;
     let min_emissive = 0;
     let max_emissive = 1;
