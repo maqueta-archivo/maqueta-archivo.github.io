@@ -45,10 +45,10 @@
       last_time = now;
 
       if (document.getElementById("maqueta").components.material && document.getElementById("maqueta").components.material.material && document.getElementById("maqueta").components.material.material.map) {
-        let new_offset = document.getElementById("maqueta").components.material.material.map.offset.y - offset_update * dt;
+        let new_offset = document.getElementById("maqueta").components.material.material.map.offset.y + offset_update * dt;
 
-        if (new_offset <= min_offset) {
-          new_offset = max_offset;
+        if (new_offset >= max_offset) {
+          new_offset = min_offset;
         }
 
         document.getElementById("maqueta").components.material.material.map.offset.y = new_offset;
