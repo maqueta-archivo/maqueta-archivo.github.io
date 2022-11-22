@@ -21,7 +21,7 @@
 
     <a-entity mindar-image-target="targetIndex: 0">
       <a-obj-model id="maqueta" rotation="105 0 0" position="0.4 5 1.5" scale="100 100 100" src="#pamplonaModelObj"
-        material="src: ./Pamplona_3D_Color2.png; opacity: 0.3; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #00FFFF; emissiveIntensity: 0.5"></a-obj-model>
+        material="src: ./Pamplona_3D_Color2.png; opacity: 0.3; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #00FFFF; emissiveIntensity: 1"></a-obj-model>
     </a-entity>
   </a-scene>
   
@@ -29,8 +29,8 @@
     let last_time = Date.now();
 
     let offset_update = 0.6;
-    let min_emissive = 0.1;
-    let max_emissive = 0.3;
+    let min_emissive = 0.3;
+    let max_emissive = 1;
     let min_offset = -1;
     let max_offset = 1;
 
