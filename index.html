@@ -1,6 +1,8 @@
 <html>
 
 <head>
+  <title>Pamplona AR</title>
+  <link rel="icon" type="image/x-icon" href="/Images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
@@ -9,70 +11,77 @@
 </head>
 
 <body>
-  <a-scene id="scene" mindar-image="imageTargetSrc: ./Targets/targets_pict.mind; filterMinCF:0.0001; filterBeta: 10" color-space="sRGB"
-    renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false"
-    stats >
+  <a-scene id="scene"
+    mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 10"
+    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false" stats>
     <a-assets>
       <a-asset-item id="pamplonaModelObj" src="./Models/Pamplona_3D_Low_V00.obj"></a-asset-item>
+
+      <img id="ImageCarouselLeftArrowAsset" src="./Images/GUI/LeftArrow.png">
+      <img id="ImageCarouselRigthArrowAsset" src="./Images/GUI/RigthArrow.png">
+
+      <img id="ImageCarouselAsset01" src="./Images/PlazaToros/01-DFN_IMG4674.jpg" width="1.352" height="1">
+      <img id="ImageCarouselAsset02" src="./Images/PlazaToros/02-FOT_AMAT_309.jpg" width="1.614" height="1">
+      <img id="ImageCarouselAsset03" src="./Images/PlazaToros/03-FOT_AMAT_N_096.jpg" width="1.086" height="1">
+      <img id="ImageCarouselAsset04" src="./Images/PlazaToros/04-FOT_AMAT_N_123.jpg" width="1.082" height="1">
+      <img id="ImageCarouselAsset05" src="./Images/PlazaToros/05-FOT_GALLE_SERIE 31_620.jpg" width="1.507" height="1">
+      <img id="ImageCarouselAsset06" src="./Images/PlazaToros/06-FOT_BELZUNCE_N_107.jpg" width="1.733" height="1">
+      <img id="ImageCarouselAsset07" src="./Images/PlazaToros/07-FOT_GALLE_SERIE 23_327.jpg" width="1.563" height="1">
+      <img id="ImageCarouselAsset08" src="./Images/PlazaToros/08-FOT_SERIE 32_54.jpg" width="1.595" height="1">
+      <img id="ImageCarouselAsset09" src="./Images/PlazaToros/09-FOT_GALLE_SERIE 32_631.jpg" width="1.518" height="1">
+      <img id="ImageCarouselAsset10" src="./Images/PlazaToros/10-FOT_BELZUNCE_N_121.jpg" width="1.728" height="1">
+      <img id="ImageCarouselAsset11" src="./Images/PlazaToros/11-FOT_BELZUNCE_N_117.jpg" width="1.710" height="1">
+      <img id="ImageCarouselAsset12" src="./Images/PlazaToros/12-FOT_GALLE_A_104.jpg" width="1.441" height="1">
+      <img id="ImageCarouselAsset13" src="./Images/PlazaToros/13-FOT_GALLE_A_096.jpg" width="1.441" height="1">
+      <img id="ImageCarouselAsset14" src="./Images/PlazaToros/14-FOT_GALLE_SERIE 31_358.jpg" width="0.641" height="1">
+      <img id="ImageCarouselAsset15" src="./Images/PlazaToros/15-FOT_FOAT_1954.jpg" width="0.782" height="1">
+      <img id="ImageCarouselAsset16" src="./Images/PlazaToros/16-FOT_FOAT_1897.jpg" width="1.402" height="1">
+
+      <img id="VideoThumbnailPlayButtonAsset" src="./Images/GUI/Play.png">
+      <img id="VideoThumbnailAsset" src="./Images/Archivo_Real_y_General_de_Navarra.jpg">
+      <video id="VideoAsset" loop="true" src="./Videos/Archivo_Real_y_General_de_Navarra-360p_compressed.mp4"></video>
     </a-assets>
 
-    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+      raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
 
-    <a-entity mindar-image-target="targetIndex: 0">
+    <a-entity id="TargetMaqueta" mindar-image-target="targetIndex: 0">
       <a-obj-model id="maqueta" rotation="0 0 -2.26" position="-1 -1 0" scale="60 60 60" src="#pamplonaModelObj"
         material="src: ./Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"></a-obj-model>
     </a-entity>
+
+    <a-entity id="TargetCarousel" mindar-image-target="targetIndex: 1">
+      <a-image id="ImageCarouselEntity" src="#ImageCarouselAsset01" position="0 0 0.01" width="1.352"
+        height="1"></a-image>
+
+      <a-plane id="ImageCarouselLeftArrowBackgroundEntity" material="visible: false" width="0.5" height="0.25"
+        position="-0.338 -0.65 0.01" class="clickable">
+        <a-image id="ImageCarouselLeftArrowEntity" src="#ImageCarouselLeftArrowAsset" width="0.125" height="0.25"
+          position="0 0 0.01" opacity="0.75"></a-image>
+      </a-plane>
+
+      <a-plane id="ImageCarouselRigthArrowBackgroundEntity" material="visible: false" width="0.5" height="0.25"
+        position="0.338 -0.65 0.01" class="clickable">
+        <a-image id="ImageCarouselRigthArrowEntity" src="#ImageCarouselRigthArrowAsset" width="0.125" height="0.25"
+          position="0 0 0.01" opacity="0.75"></a-image>
+      </a-plane>
+    </a-entity>
+
+    <a-entity id="TargetVideo" mindar-image-target="targetIndex: 2">
+      <a-image id="VideoThumbnailEntity" src="#VideoThumbnailAsset" width="1.777" height="1" position="0 0 0.01"
+        visible="true" class="clickable" transparent="false">
+        <a-image id="VideoThumbnailPlayButtonEntity" src="#VideoThumbnailPlayButtonAsset" width="0.25" height="0.25"
+          position="0 0 0.01" opacity="0.5"></a-image>
+      </a-image>
+      <a-video id="VideoEntity" src="#VideoAsset" width="1.777" height="1" position="0 0 0.02"
+        visible="false"></a-video>
+    </a-entity>
   </a-scene>
-  
-  <script>
-    let last_time = Date.now();
 
-    let offset_update = 0.25;
-    let min_emissive = 0.3;
-    let max_emissive = 1;
-    let min_offset = -1;
-    let max_offset = 1;
-
-    function mapRange(current, in_min, in_max, out_min, out_max) {
-      let scale = (out_max - out_min) / (in_max - in_min)
-      let offset = -in_min * (out_max - out_min) / (in_max - in_min) + out_min
-      return current * scale + offset
-    }
-    function updateShader() {
-      let now = Date.now();
-      let dt = (now - last_time) / 1000;
-      last_time = now;
-
-      if (document.getElementById("maqueta").components.material && document.getElementById("maqueta").components.material.material && document.getElementById("maqueta").components.material.material.map) {
-        let new_offset = document.getElementById("maqueta").components.material.material.map.offset.y + offset_update * dt;
-
-        if (new_offset >= max_offset) {
-          new_offset = min_offset;
-        }
-
-        document.getElementById("maqueta").components.material.material.map.offset.y = new_offset;
-
-        let new_emissive = 0;
-        if (new_offset <= 0) {
-          new_emissive = mapRange(new_offset, -1, 0, 0, 1);
-        } else {
-          new_emissive = mapRange(new_offset, 0, 1, 1, 0);
-        }
-
-        if (new_emissive > 1)
-          new_emissive = 1;
-        if (new_emissive < 0)
-          new_emissive = 0;
-        document.getElementById("maqueta").components.material.material.emissiveIntensity = new_emissive;
-      }
-      setTimeout(() => { updateShader(); }, 5);
-
-    }
-      setTimeout(() => { updateShader(); }, 5);
-    
-    //setTimeout(() => { document.getElementById("scene").components.inspector.openInspector(); }, 2000);
-    
-  </script>
+  <script src="Scripts/maqueta.js"></script>
+  <script src="Scripts/carousel.js"></script>
+  <script src="Scripts/video.js"></script>
 </body>
+
 </html>
