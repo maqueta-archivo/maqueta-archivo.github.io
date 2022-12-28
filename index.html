@@ -41,9 +41,6 @@
       <img id="VideoThumbnailPlayButtonAsset" src="./Images/GUI/Play.png">
       <img id="VideoThumbnailAsset" src="./Images/Archivo_Real_y_General_de_Navarra.jpg">
       <video id="VideoAsset" loop="true" src="./Videos/Archivo_Real_y_General_de_Navarra-360p_compressed.mp4"></video>
-
-      <a-asset-item id="EdificioArchivo" src="./Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
-
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
@@ -55,7 +52,7 @@
     </a-entity>
 
     <a-entity id="TargetCarousel" mindar-image-target="targetIndex: 1">
-      <!-- <a-image id="ImageCarouselEntity" src="#ImageCarouselAsset01" position="0 0 0.01" width="1.352"
+      <a-image id="ImageCarouselEntity" src="#ImageCarouselAsset01" position="0 0 0.01" width="1.352"
         height="1"></a-image>
 
       <a-plane id="ImageCarouselLeftArrowBackgroundEntity" material="visible: false" width="0.5" height="0.25"
@@ -68,8 +65,7 @@
         position="0.338 -0.65 0.01" class="clickable">
         <a-image id="ImageCarouselRigthArrowEntity" src="#ImageCarouselRigthArrowAsset" width="0.125" height="0.25"
           position="0 0 0.01" opacity="0.75"></a-image>
-      </a-plane> -->
-      <a-entity gltf-model="#EdificioArchivo"></a-entity>
+      </a-plane>
     </a-entity>
 
     <a-entity id="TargetVideo" mindar-image-target="targetIndex: 2">
