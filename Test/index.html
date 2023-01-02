@@ -20,8 +20,9 @@
       <a-asset-item id="EdificioArchivo" src="/Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
 
     </a-assets>
-    <a-entity light="type: directional; castShadow: false; intensity: 0.7; shadowCameraVisible: false; position="-5 3 1.5"></a-entity>
-    
+      <a-entity light="type: ambient; intensity: 0.5;"></a-entity>
+      <a-entity light="type: directional; castShadow: true; intensity: 1; shadowCameraVisible: true;" position="-5 3 1.5"></a-entity>
+   
     
 
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
