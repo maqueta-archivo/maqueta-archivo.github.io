@@ -46,23 +46,23 @@ hammertime.on("pinch", (ev) => {
     scale.y = scale.y * ev.scale;
     scale.z = scale.z * ev.scale;
 
-    if(scale.x > 1){
-        scale.x = 1;
+    if(scale.x > 1.5){
+        scale.x = 1.5;
     }
-    if(scale.x < 0.2){
-        scale.x = 0.2;
+    if(scale.x < 0.5){
+        scale.x = 0.5;
     }
     if(scale.y > 1){
-        scale.y = 1;
+        scale.y = 1.5;
     }
-    if(scale.y < 0.2){
-        scale.y = 0.2;
+    if(scale.y < 0.5){
+        scale.y = 0.5;
     }
-    if(scale.z > 1){
-        scale.z = 1;
+    if(scale.z > 1.5){
+        scale.z = 1.5;
     }
-    if(scale.z < 0.2){
-        scale.z = 0.2;
+    if(scale.z < 0.5){
+        scale.z = 0.5;
     }
 
     EdificioModel.setAttribute("scale", scale);
