@@ -58,7 +58,7 @@ hammertime.on("pinch", (ev) => {
         if (scale.x < 0.5) {
             scale.x = 0.5;
         }
-        if (scale.y > 1) {
+        if (scale.y > 1.5) {
             scale.y = 1.5;
         }
         if (scale.y < 0.5) {
@@ -72,12 +72,8 @@ hammertime.on("pinch", (ev) => {
         }
 
         EdificioModel.setAttribute("scale", scale);
-
-        var DebugText = document.querySelector('#DebugText');
-        DebugText.setAttribute("text","value: " + ev.scale);
     }
 });
-DebugText.setAttribute("text","value: " + EdificioModel.getAttribute("scale").x);
 
 TargetEdificio.addEventListener("targetFound", event => {
     visible = true;
