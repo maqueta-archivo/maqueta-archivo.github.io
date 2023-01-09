@@ -49,6 +49,10 @@
         element.components['mindar-image-target'].updateWorldMatrix(null, )
       });
       document.querySelector('a-scene').systems["mindar-image-system"]._startVideo()
+      setTimeout(function(){
+        // This hides the address bar:
+        window.scrollTo(0, 1);
+    }, 0);
     }
 
     window.addEventListener("load",function() {
