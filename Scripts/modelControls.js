@@ -40,6 +40,30 @@ hammertime.on('pan', (ev) => {
 });
 
 hammertime.on("pinch", (ev) => {
-    let scale = { x: ev.scale, y: ev.scale, z: ev.scale }
+    let scale = EdificioModel.getAttribute("scale")
+
+    scale.x = scale.x * ev.scale;
+    scale.y = scale.y * ev.scale;
+    scale.z = scale.z * ev.scale;
+
+    if(scale.x > 1){
+        scale.x = 1;
+    }
+    if(scale.x < 0.2){
+        scale.x = 0.2;
+    }
+    if(scale.y > 1){
+        scale.y = 1;
+    }
+    if(scale.y < 0.2){
+        scale.y = 0.2;
+    }
+    if(scale.z > 1){
+        scale.z = 1;
+    }
+    if(scale.z < 0.2){
+        scale.z = 0.2;
+    }
+
     EdificioModel.setAttribute("scale", scale);
 });
