@@ -8,13 +8,16 @@
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://rawgit.com/bestiejs/platform.js/master/platform.js"></script>
+  <script src="https://rawgit.com/protyze/aframe-always-fullscreen-component/master/dist/aframe-always-fullscreen-component.min.js"></script>
 </head>
 
 <body>
   <a-scene id="scene"
     mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 0.001"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" stats>
+    device-orientation-permission-ui="enabled: false" always-fullscreen="platform: all"
+    stats>
     <a-assets>
       <a-asset-item id="pamplonaModelObj" src="./Models/Pamplona_3D_Low_V00.obj"></a-asset-item>
 
@@ -77,6 +80,10 @@
       <a-video id="VideoEntity" src="#VideoAsset" width="1.777" height="1" position="0 0 0.02"
         visible="false"></a-video>
     </a-entity>
+
+    <div class="a-enter-vr embedded" aframe-injected>
+      <button id="fullscreenbutton"></button>
+    </div>
   </a-scene>
 
   <script src="./Scripts/maqueta.js"></script>
