@@ -8,8 +8,9 @@
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
-  <script src="https://rawgit.com/bestiejs/platform.js/master/platform.js"></script>
-  <script src="https://rawgit.com/protyze/aframe-always-fullscreen-component/master/dist/aframe-always-fullscreen-component.min.js"></script>
+  <script src="./Scripts/Fullscreen/platform.js"></script>
+  <script src="./Scripts/Fullscreen/aframe-always-fullscreen-component.js"></script>
+  <link rel="stylesheet" href="./Style/style.css">
 </head>
 
 <body>
@@ -89,6 +90,21 @@
   <script src="./Scripts/maqueta.js"></script>
   <script src="./Scripts/carousel.js"></script>
   <script src="./Scripts/video.js"></script>
+
+  <script>
+    window.onresize = function () {
+      if(document.querySelector('a-scene') && document.querySelector('a-scene').systems["mindar-image-system"]){
+        document.querySelector('a-scene').systems["mindar-image-system"].pause()
+        document.querySelector('video').remove();
+        Array.from(document.querySelectorAll('[mindar-image-target]')).forEach((element,index) => {
+          element.components['mindar-image-target'].updateWorldMatrix(null, )
+        });
+        document.querySelector('a-scene').systems["mindar-image-system"]._startVideo()
+      }
+      
+    }
+
+  </script>
 </body>
 
 </html>

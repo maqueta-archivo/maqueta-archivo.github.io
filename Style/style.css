@@ -1,0 +1,32 @@
+#fullscreenmask, #mask {
+    color: #fff;
+    text-align: center;
+    font-size: 3vh;
+    font-family: Roboto, Arial;
+}
+
+#fullscreenmask:before {
+    content: 'Toca para Pantalla Completa';
+    position: relative;
+    top: 30%;
+    background: '#663399 url(../Images/GUI/fullscreen_mask.svg) 50% 50%/25% 25% no-repeat'
+}
+
+#mask:before {
+    content: 'Scroll Down for Fullscreen';
+    position: relative;
+    top: 30%;
+    background: '#663399 url(../Images/GUI/mask.svg) 50% 50%/25% 25% no-repeat'
+}
+
+#fullscreenButton {
+    background: '#663399 url(../Images/GUI/fullscreen_button.svg) 50% 50%/100% 100% no-repeat'
+}
+
+#cancelButton {
+    background: 'url(../Images/GUI/cancel_button.svg) 50% 50%/100% 100% no-repeat';
+}
+
+body {
+    margin: 0;
+}
