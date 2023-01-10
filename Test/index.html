@@ -24,13 +24,20 @@
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
 
     </a-assets>
-    <a-entity light="type: ambient; intensity: 0.25;"></a-entity>
-    <a-entity light="type: directional; color: #FCE191; castShadow: true; intensity: 1; shadowCameraVisible: true;"
-      position="-5 3 1.5" rotation="-90 0 0"></a-entity>
+       <a-cubemap id="Enviroment">
+       <img src="../Textures/Face_01.jpg">  
+       <img src="../Textures/Face_-01.jpg"> 
+       <img src="../Textures/Face_02.jpg"> 
+       <img src="../Textures/Face_-02.jpg">
+       <img src="../Textures/Face_03.jpg">
+       <img src="../Textures/Face_-03.jpg">
+       </a-cubemap>
+    </a-assets>  
+    
+    <a-light type="probe" envMap="#Enviroment"></a-light>
 
 
-
-
+  
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
       raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
 
