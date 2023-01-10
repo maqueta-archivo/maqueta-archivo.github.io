@@ -5,11 +5,12 @@
   <link rel="icon" type="image/x-icon" href="../Images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
   <script src="../Scripts/Fullscreen/platform.js"></script>
   <script src="../Scripts/Fullscreen/aframe-always-fullscreen-component.js"></script>
+  <script src="../Scripts/smooth.js"></script>
   <link rel="stylesheet" href="../Style/style.css">
 </head>
 
@@ -17,16 +18,16 @@
   <a-scene id="scene"
     mindar-image="imageTargetSrc: ../Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 0.001"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" always-fullscreen="platform: all"
+    device-orientation-permission-ui="enabled: false" 
     stats>
     <a-assets>
 
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
       
        <a-cubemap id="Enviroment">
-         <img src="../Textures/Face_01.jpg">  
-         <img src="../Textures/Face_-01.jpg"> 
-         <img src="../Textures/Face_02.jpg"> 
+         <img src="../Textures/Face_01.jpg">
+         <img src="../Textures/Face_-01.jpg">
+         <img src="../Textures/Face_02.jpg">
          <img src="../Textures/Face_-02.jpg">
          <img src="../Textures/Face_03.jpg">
          <img src="../Textures/Face_-03.jpg">
@@ -46,7 +47,7 @@
     <a-entity id="TargetEdificio" mindar-image-target="targetIndex: 1">
       <a-entity id="GlobalEdificio">
         <a-entity id="TargetEdificioModel" gltf-model="#EdificioArchivo" rotation="90 0 0" position="0 0 0 "
-          scale="0.6 0.6 0.6"></a-entity>
+          scale="0.6 0.6 0.6" smooth></a-entity>
       </a-entity>
     </a-entity>
 

@@ -1,10 +1,13 @@
-import "./hammer.min.js";
+import "./Libraries/Hammer/hammer.min.js";
 
 var scene = document.querySelector('#scene');
 var TargetEdificio = document.querySelector('#TargetEdificio');
 var EdificioModel = document.querySelector('#GlobalEdificio');
 
 var visible = false;
+
+const rotationSensibility = 2;
+const zoomSensibility = 1;
 
 var hammertime = new Hammer(scene);
 var pinch = new Hammer.Pinch();
@@ -15,22 +18,22 @@ hammertime.on('pan', (ev) => {
         let rotation = EdificioModel.getAttribute("rotation")
         switch (ev.direction) {
             case 2:
-                rotation.z = rotation.z - 4
+                rotation.z = rotation.z - rotationSensibility;
                 console.log("left");
                 break;
             case 4:
-                rotation.z = rotation.z + 4
+                rotation.z = rotation.z + rotationSensibility;
                 console.log("rigth");
                 break;
             case 8:
-                rotation.x = rotation.x - 4
+                rotation.x = rotation.x - rotationSensibility;
                 if (rotation.x < -30) {
                     rotation.x = -30;
                 }
                 console.log("up");
                 break;
             case 16:
-                rotation.x = rotation.x + 4
+                rotation.x = rotation.x + rotationSensibility;
                 if (rotation.x > 30) {
                     rotation.x = 30;
                 }
@@ -40,7 +43,7 @@ hammertime.on('pan', (ev) => {
             default:
                 break;
         }
-        EdificioModel.setAttribute("rotation", rotation)
+        EdificioModel.setAttribute("rotation", rotation);
     }
 });
 
@@ -48,9 +51,9 @@ hammertime.on("pinch", (ev) => {
     if (visible) {
         let scale = EdificioModel.getAttribute("scale")
 
-        scale.x = scale.x * ev.scale;
-        scale.y = scale.y * ev.scale;
-        scale.z = scale.z * ev.scale;
+        scale.x = scale.x * ev.scale * zoomSensibility;
+        scale.y = scale.y * ev.scale * zoomSensibility;
+        scale.z = scale.z * ev.scale * zoomSensibility;
 
         if (scale.x > 1.5) {
             scale.x = 1.5;
