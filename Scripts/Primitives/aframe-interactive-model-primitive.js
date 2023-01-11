@@ -5,7 +5,7 @@ AFRAME.registerComponent('a-interactive-model-nested-entity-', {
     model: { type: 'string' },
     position: { type: 'string', default: '0 0 0' },
     rotation: { type: 'string', default: '0 0 0' },
-    scale: { type: 'string', default: '0 0 0' }
+    scale: { type: 'string', default: '1 1 1' }
   },
   init: function () {
     let nested = document.createElement('a-entity');
