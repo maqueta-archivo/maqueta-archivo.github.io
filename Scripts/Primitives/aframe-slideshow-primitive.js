@@ -5,13 +5,13 @@ AFRAME.registerPrimitive('a-slideshow-images', {
 
 AFRAME.registerComponent('a-slideshow-nested-elements-', {
     schema: {
-        'slidesSrc': { type: 'selector' },
+        'slidesSrc': { type: 'string' },
         'leftArrowSrc': { type: 'string' },
         'rightArrowSrc': { type: 'string' }
     },
     init: function () {
         this.current_slide_number = 0;
-        this.slides = this.data['slidesSrc'];
+        this.slides = document.querySelector(this.data['slidesSrc']);
         this.current_slide = document.createElement('a-image');
         this.el.appendChild(this.current_slide);
 

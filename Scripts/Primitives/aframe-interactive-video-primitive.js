@@ -1,7 +1,7 @@
 AFRAME.registerComponent('a-interactive-video-nested-elements-', {
     schema: {
-        'videoTarget': { type: 'selector' },
-        'videoSrc': { type: 'selector' },
+        'videoTarget': { type: 'string' },
+        'videoSrc': { type: 'string' },
         'videoWidth': { type: 'number' },
         'videoHeight': { type: 'number' },
         'thumbnailSrc': { type: 'string' },
@@ -9,8 +9,8 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
     },
     init: function () {
         this.is_playing = false;
-        this.video_src = this.data['videoSrc'];
-        this.video_target = this.data['videoTarget'];
+        this.video_src = document.querySelector(this.data['videoSrc']);
+        this.video_target = document.querySelector(this.data['videoTarget']);
 
         this.thumbnail = document.createElement('a-image');
         this.thumbnail.setAttribute('src', this.data['thumbnailSrc']);

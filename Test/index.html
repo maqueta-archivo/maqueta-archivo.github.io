@@ -27,6 +27,7 @@
     <a-assets>
 
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
+      <a-asset-item id="SelloArchivo" src="../Models/Sello_3D_01.glb"></a-asset-item>
 
       <a-cubemap id="Enviroment">
         <img src="../Textures/Face_01.jpg">
@@ -45,6 +46,10 @@
 
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
       raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-interactive-model model="#SelloArchivo" max-zoom=1.5 min-zoom=0.5></a-interactive-model>
+    </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1">
       <a-interactive-model model="#EdificioArchivo" nested-rotation="90 0 0" nested-position="0 0 0 "
