@@ -4,51 +4,51 @@
   <title>Pamplona AR</title>
   <link rel="icon" type="image/x-icon" href="../Images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
-  <script src="../Scripts/Fullscreen/platform.js"></script>
-  <script src="../Scripts/Fullscreen/aframe-always-fullscreen-component.js"></script>
-  <script src="../Scripts/smooth.js"></script>
+  <script src="../Scripts/Libraries/MindAR/1.1.5/mindar-image.prod.js"></script>
+  <script src="../Scripts/Libraries/AFrame/1.3.0/aframe.min.js"></script>
+  <script src="../Scripts/Libraries/AFrame/Extras/6.1.1/aframe-extras.min.js"></script>
+  <script src="../Scripts/Libraries/MindAR/1.1.5/mindar-image-aframe.prod.js"></script>
+
+  <script src="../Scripts/Components/Fullscreen/platform.js"></script>
+  <script src="../Scripts/Components/Fullscreen/aframe-always-fullscreen-component.js"></script>
+
+  <script src="../Scripts/Components/aframe-resize-update-component.js"></script>
+
+  <script src="../Scripts/Primitives/aframe-ineractive-model-primitive.js" type="module"></script>
+
   <link rel="stylesheet" href="../Style/style.css">
 </head>
 
 <body>
-  <a-scene id="scene"
+  <a-scene
     mindar-image="imageTargetSrc: ../Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 0.001"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" always-fullscreen="platform: all"
-    stats>
+    device-orientation-permission-ui="enabled: false" always-fullscreen="platform: all" update-resize stats>
     <a-assets>
 
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
-      
-       <a-cubemap id="Enviroment">
-         <img src="../Textures/Face_01.jpg">
-         <img src="../Textures/Face_-01.jpg">
-         <img src="../Textures/Face_02.jpg">
-         <img src="../Textures/Face_-02.jpg">
-         <img src="../Textures/Face_03.jpg">
-         <img src="../Textures/Face_-03.jpg">
-       </a-cubemap>
-    </a-assets>  
-    
-    
+
+      <a-cubemap id="Enviroment">
+        <img src="../Textures/Face_01.jpg">
+        <img src="../Textures/Face_-01.jpg">
+        <img src="../Textures/Face_02.jpg">
+        <img src="../Textures/Face_-02.jpg">
+        <img src="../Textures/Face_03.jpg">
+        <img src="../Textures/Face_-03.jpg">
+      </a-cubemap>
+    </a-assets>
+
+
     <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="-1 1 0"></a-entity>
-    
+
     <a-light type="probe" envMap="#Enviroment"></a-light>
 
-
-  
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
       raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
 
-    <a-entity id="TargetEdificio" mindar-image-target="targetIndex: 1">
-      <a-entity id="GlobalEdificio">
-        <a-entity id="TargetEdificioModel" gltf-model="#EdificioArchivo" rotation="90 0 0" position="0 0 0 "
-          scale="0.6 0.6 0.6" smooth></a-entity>
-      </a-entity>
+    <a-entity mindar-image-target="targetIndex: 1">
+      <a-interactive-model model="#EdificioArchivo" nested-rotation="90 0 0" nested-position="0 0 0 "
+        nested-scale="0.6 0.6 0.6"></a-interactive-model>
     </a-entity>
 
     <div class="a-enter-vr embedded" aframe-injected>
@@ -57,22 +57,6 @@
 
   </a-scene>
 
-  <script type="module" src="../Scripts/modelControls.js"></script>
-
-  <script>
-    window.onresize = function () {
-      if(document.querySelector('a-scene') && document.querySelector('a-scene').systems["mindar-image-system"]){
-        document.querySelector('a-scene').systems["mindar-image-system"].pause()
-        document.querySelector('video').remove();
-        Array.from(document.querySelectorAll('[mindar-image-target]')).forEach((element,index) => {
-          element.components['mindar-image-target'].updateWorldMatrix(null, )
-        });
-        document.querySelector('a-scene').systems["mindar-image-system"]._startVideo()
-      }
-      
-    }
-
-  </script>
 </body>
 
 </html>

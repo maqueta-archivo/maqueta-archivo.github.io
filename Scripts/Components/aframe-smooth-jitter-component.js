@@ -1,4 +1,4 @@
-AFRAME.registerComponent("smooth", {
+AFRAME.registerComponent("smooth-jitter", {
     init: function () {
         this.target = this.el;
         this.prevPosition = new THREE.Vector3();
