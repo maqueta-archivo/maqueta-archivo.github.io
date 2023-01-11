@@ -3,9 +3,9 @@ import "../Components/aframe-model-controls-component.js";
 AFRAME.registerComponent('a-interactive-model-nested-entity-', {
   schema: {
     model: { type: 'string' },
-    position: { type: 'string' },
-    rotation: { type: 'string' },
-    scale: { type: 'string' }
+    position: { type: 'string', default: '0 0 0' },
+    rotation: { type: 'string', default: '0 0 0' },
+    scale: { type: 'string', default: '0 0 0' }
   },
   init: function () {
     let nested = document.createElement('a-entity');
@@ -27,6 +27,14 @@ AFRAME.registerPrimitive('a-interactive-model', {
     model: 'a-interactive-model-nested-entity-.model',
     'nested-position': 'a-interactive-model-nested-entity-.position',
     'nested-rotation': 'a-interactive-model-nested-entity-.rotation',
-    'nested-scale': 'a-interactive-model-nested-entity-.scale'
+    'nested-scale': 'a-interactive-model-nested-entity-.scale',
+    'rotation-sensibility': 'touch-control.rotationSensibility',
+    'max-rotation-x': 'touch-control.maxRotationX',
+    'max-rotation-y': 'touch-control.maxRotationY',
+    'min-rotation-x': 'touch-control.minRotationX',
+    'min-rotation-y': 'touch-control.minRotationY',
+    'zoom-sensibility': 'touch-control.zoomSensibility',
+    'max-zoom': 'touch-control.maxZoom',
+    'min-zoom': 'touch-control.minZoom',
   }
 });
