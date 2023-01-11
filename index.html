@@ -4,10 +4,10 @@
   <title>Pamplona AR</title>
   <link rel="icon" type="image/x-icon" href="./Images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="./Scripts/Libraries/MindAR/1.1.5/mindar-image.prod.js"></script>
+  <script src="./Scripts/Libraries/AFrame/1.2.0/aframe.min.js"></script>
+  <script src="./Scripts/Libraries/AFrame/Extras/6.1.1/aframe-extras.min.js"></script>
+  <script src="./Scripts/Libraries/MindAR/1.1.5/mindar-image-aframe.prod.js"></script>
 
   <script src="./Scripts/Components/Fullscreen/platform.js"></script>
   <script src="./Scripts/Components/Fullscreen/aframe-always-fullscreen-component.js"></script>
@@ -33,7 +33,7 @@
       <img id="PlazaTorosSlideshowLeftArrow" src="./Images/GUI/LeftArrow.png">
       <img id="PlazaTorosSlideshowRightArrow" src="./Images/GUI/RigthArrow.png">
 
-      <a-slideshow-images id="SlideshowPlazaTorosAsset">
+      <a-slideshow-images id="SlideshowPlazaToros">
         <img src="./Images/PlazaToros/01-DFN_IMG4674.jpg" width="1.352" height="1">
         <img src="./Images/PlazaToros/02-FOT_AMAT_309.jpg" width="1.614" height="1">
         <img src="./Images/PlazaToros/03-FOT_AMAT_N_096.jpg" width="1.086" height="1">
@@ -67,7 +67,7 @@
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-interactive-slideshow slides-src="#SlideshowPlazaTorosAsset" left-arrow-src="#PlazaTorosSlideshowLeftArrow"
+      <a-interactive-slideshow slides-src="#SlideshowPlazaToros" left-arrow-src="#PlazaTorosSlideshowLeftArrow"
         right-arrow-src="#PlazaTorosSlideshowRightArrow">
       </a-interactive-slideshow>
 

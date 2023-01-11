@@ -12,7 +12,6 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
     init: function () {
         this.current_slide_number = 0;
         this.slides = document.querySelector(this.data['slidesSrc']);
-        
         this.current_slide = document.createElement('a-image');
         this.el.appendChild(this.current_slide);
 
