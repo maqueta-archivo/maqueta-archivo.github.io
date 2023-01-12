@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -20,35 +21,23 @@
 
 <body>
   <a-scene
-    mindar-image="imageTargetSrc: ../Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 0.001"
-    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" update-resize stats>
+    mindar-image="imageTargetSrc: ../Targets/targets_three.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.001"
+    color-space="sRGB" renderer="colorManagement: true; physicallyCorrectLights: false" vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false" update-resize stats light="defaultLightsEnabled: true"
+    data-aframe-default-light>
     <a-assets>
 
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
       <a-asset-item id="SelloArchivo" src="../Models/Sello_3D_01.glb"></a-asset-item>
 
-      <a-cubemap id="Enviroment">
-        <img src="../Textures/Face_01.jpg">
-        <img src="../Textures/Face_-01.jpg">
-        <img src="../Textures/Face_02.jpg">
-        <img src="../Textures/Face_-02.jpg">
-        <img src="../Textures/Face_03.jpg">
-        <img src="../Textures/Face_-03.jpg">
-      </a-cubemap>
     </a-assets>
-
-
-    <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="-1 1 0"></a-entity>
-
-    <a-light type="probe" envMap="#Enviroment"></a-light>
 
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
       raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
 
     <a-entity mindar-image-target="targetIndex: 0" id="TargetSelloArchivo">
-      <a-interactive-model model="#SelloArchivo" rotation-sensibility=2 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
-        nested-scale="0.2 0.2 0.2" target="#TargetSelloArchivo"></a-interactive-model>
+      <a-interactive-model id="ModeloSello" model="#SelloArchivo" rotation-sensibility=2 zoom-sensibility=1 max-zoom=1.5
+        min-zoom=0.5 nested-scale="0.2 0.2 0.2" target="#TargetSelloArchivo"></a-interactive-model>
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1" id="TargetMaquetaArchivo">

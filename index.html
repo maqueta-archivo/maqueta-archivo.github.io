@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -23,7 +24,7 @@
 
 <body>
   <a-scene
-    mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 0.0001"
+    mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false" update-resize stats inspector keyboard-shortcuts>
     <a-assets>
@@ -33,44 +34,43 @@
       <img id="PlazaTorosSlideshowRightArrow" src="./Images/GUI/RigthArrow.png">
 
       <a-slideshow-gallery id="SlideshowPlazaToros">
-        <a-slideshow-image src="./Images/PlazaToros/01-DFN_IMG4674.jpg" width="1.352" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/02-FOT_AMAT_309.jpg" width="1.614" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/03-FOT_AMAT_N_096.jpg" width="1.086" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/04-FOT_AMAT_N_123.jpg" width="1.082" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/05-FOT_GALLE_SERIE 31_620.jpg" width="1.507" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/06-FOT_BELZUNCE_N_107.jpg" width="1.733" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/07-FOT_GALLE_SERIE 23_327.jpg" width="1.563" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/08-FOT_SERIE 32_54.jpg" width="1.595" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/09-FOT_GALLE_SERIE 32_631.jpg" width="1.518" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/10-FOT_BELZUNCE_N_121.jpg" width="1.728" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/11-FOT_BELZUNCE_N_117.jpg" width="1.710" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/12-FOT_GALLE_A_104.jpg" width="1.441" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/13-FOT_GALLE_A_096.jpg" width="1.441" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/14-FOT_GALLE_SERIE 31_358.jpg" width="0.641" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/15-FOT_FOAT_1954.jpg" width="0.782" height="1"></a-slideshow-image>
-        <a-slideshow-image src="./Images/PlazaToros/16-FOT_FOAT_1897.jpg" width="1.402" height="1"></a-slideshow-image>
+        <a-slide-img src="./Images/PlazaToros/01-DFN_IMG4674.jpg" width="1.352" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/02-FOT_AMAT_309.jpg" width="1.614" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/03-FOT_AMAT_N_096.jpg" width="1.086" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/04-FOT_AMAT_N_123.jpg" width="1.082" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/05-FOT_GALLE_SERIE 31_620.jpg" width="1.507" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/06-FOT_BELZUNCE_N_107.jpg" width="1.733" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/07-FOT_GALLE_SERIE 23_327.jpg" width="1.563" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/08-FOT_SERIE 32_54.jpg" width="1.595" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/09-FOT_GALLE_SERIE 32_631.jpg" width="1.518" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/10-FOT_BELZUNCE_N_121.jpg" width="1.728" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/11-FOT_BELZUNCE_N_117.jpg" width="1.710" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/12-FOT_GALLE_A_104.jpg" width="1.441" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/13-FOT_GALLE_A_096.jpg" width="1.441" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/14-FOT_GALLE_SERIE 31_358.jpg" width="0.641" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/15-FOT_FOAT_1954.jpg" width="0.782" height="1"></a-slide-img>
+        <a-slide-img src="./Images/PlazaToros/16-FOT_FOAT_1897.jpg" width="1.402" height="1"></a-slide-img>
       </a-slideshow-gallery>
 
       <img id="VideoThumbnailPlayButton" src="./Images/GUI/Play.png">
       <img id="VideoArchivoThumbnail" src="./Images/Archivo_Real_y_General_de_Navarra.jpg">
       <video id="VideoArchivo" loop="true" src="./Videos/Archivo_Real_y_General_de_Navarra-360p_compressed.mp4"></video>
     </a-assets>
-
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
       raycaster="far: ${customFields.libVersion}; objects: .clickable">
     </a-camera>
 
-    <a-entity mindar-image-target="targetIndex: 0" trigger-visibility="entity: #MaquetaPamplona">
-      <a-obj-model id="MaquetaPamplona" rotation="0 0 0" position="0 1 -1" scale="10 10 10" src="#pamplonaModelObj"
-      material="src: ./Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
-      hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"></a-obj-model>
+    <a-entity id="target" mindar-image-target="targetIndex: 0" trigger-visibility="entity: #MaquetaPamplona">
+      <a-obj-model id="MaquetaPamplona" rotation="0 0 0" position="2 -1 -10" scale="50 50 50" src="#pamplonaModelObj"
+        material="src: ./Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
+        hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"
+        animation="property: position; to: 2 -0.5 -10; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"></a-obj-model>
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1">
       <a-interactive-slideshow slides-src="#SlideshowPlazaToros" left-arrow-src="#PlazaTorosSlideshowLeftArrow"
         right-arrow-src="#PlazaTorosSlideshowRightArrow">
       </a-interactive-slideshow>
-
     </a-entity>
 
     <a-entity id="TargetVideo" mindar-image-target="targetIndex: 2">
@@ -79,7 +79,6 @@
       </a-interactive-video>
     </a-entity>
   </a-scene>
-
 </body>
 
 </html>

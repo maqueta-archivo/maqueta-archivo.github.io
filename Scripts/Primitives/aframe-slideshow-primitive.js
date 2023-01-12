@@ -3,7 +3,7 @@ AFRAME.registerPrimitive('a-slideshow-gallery', {
     mappings: {}
 });
 
-AFRAME.registerPrimitive('a-slideshow-image', {
+AFRAME.registerPrimitive('a-slide-img', {
     defaultComponents: {},
     mappings: {}
 });
