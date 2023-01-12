@@ -47,14 +47,15 @@
     <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
       raycaster="far: ${customFields.libVersion}; objects: .clickable"></a-camera>
 
-    <a-entity mindar-image-target="targetIndex: 0">
-      <a-interactive-model model="#SelloArchivo" max-zoom=1.5 min-zoom=0.5
-        nested-scale="0.6 0.6 0.6"></a-interactive-model>
+    <a-entity mindar-image-target="targetIndex: 0" id="TargetSelloArchivo">
+      <a-interactive-model model="#SelloArchivo" rotation-sensibility=2 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
+        nested-scale="0.4 0.4 0.4" target="#TargetSelloArchivo"></a-interactive-model>
     </a-entity>
 
-    <a-entity mindar-image-target="targetIndex: 1">
-      <a-interactive-model model="#EdificioArchivo" nested-scale="0.6 0.6 0.6" rotation-sensibility=2 max-rotation-x=30
-        min-rotation-x=-30 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5></a-interactive-model>
+    <a-entity mindar-image-target="targetIndex: 1" id="TargetMaquetaArchivo">
+      <a-interactive-model model="#EdificioArchivo" nested-scale="1 1 1" rotation-sensibility=2 max-rotation-x=30
+        min-rotation-x=-30 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
+        target="#TargetMaquetaArchivo"></a-interactive-model>
     </a-entity>
 
     <div class="a-enter-vr embedded" aframe-injected>

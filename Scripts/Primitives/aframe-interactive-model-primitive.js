@@ -24,7 +24,7 @@ AFRAME.registerPrimitive('a-interactive-model', {
   },
 
   mappings: {
-    model: 'a-interactive-model-nested-entity-.model',
+    'model': 'a-interactive-model-nested-entity-.model',
     'nested-position': 'a-interactive-model-nested-entity-.position',
     'nested-rotation': 'a-interactive-model-nested-entity-.rotation',
     'nested-scale': 'a-interactive-model-nested-entity-.scale',
@@ -36,5 +36,6 @@ AFRAME.registerPrimitive('a-interactive-model', {
     'zoom-sensibility': 'touch-control.zoomSensibility',
     'max-zoom': 'touch-control.maxZoom',
     'min-zoom': 'touch-control.minZoom',
+    'target': 'touch-control.target'
   }
 });

@@ -7,13 +7,14 @@ hammertime.add(pinch); // add it to the Manager instance
 AFRAME.registerComponent("touch-control", {
     schema: {
         rotationSensibility: { type: 'number', default: 2 },
-        maxRotationX: { type: 'number', default: Number.POSITIVE_INFINITY},
-        maxRotationY: { type: 'number', default: Number.POSITIVE_INFINITY},
-        minRotationX: { type: 'number', default: Number.NEGATIVE_INFINITY},
-        minRotationY: { type: 'number', default: Number.NEGATIVE_INFINITY},
+        maxRotationX: { type: 'number', default: Number.POSITIVE_INFINITY },
+        maxRotationY: { type: 'number', default: Number.POSITIVE_INFINITY },
+        minRotationX: { type: 'number', default: Number.NEGATIVE_INFINITY },
+        minRotationY: { type: 'number', default: Number.NEGATIVE_INFINITY },
         zoomSensibility: { type: 'number', default: 1 },
         maxZoom: { type: 'number', default: Number.POSITIVE_INFINITY },
-        minZoom: { type: 'number', default: 0 }
+        minZoom: { type: 'number', default: 0 },
+        target: { type: 'string' }
     },
     init: function () {
         this.model = this.el;
@@ -83,6 +84,12 @@ AFRAME.registerComponent("touch-control", {
 
                 this.model.setAttribute("scale", scale);
             }
+        });
+
+        this.target = document.querySelector(this.data["target"]);
+        this.target.addEventListener('targetFound', event => {
+            this.model.setAttribute("rotation", "0 0 0");
+            this.model.setAttribute("scale", "1 1 1");
         });
     }
 })
