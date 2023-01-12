@@ -1,4 +1,9 @@
-AFRAME.registerPrimitive('a-slideshow-images', {
+AFRAME.registerPrimitive('a-slideshow-gallery', {
+    defaultComponents: {},
+    mappings: {}
+});
+
+AFRAME.registerPrimitive('a-slideshow-image', {
     defaultComponents: {},
     mappings: {}
 });

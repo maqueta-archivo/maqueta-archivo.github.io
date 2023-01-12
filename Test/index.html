@@ -4,10 +4,9 @@
   <title>Pamplona AR</title>
   <link rel="icon" type="image/x-icon" href="../Images/favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="../Scripts/Libraries/MindAR/1.1.5/mindar-image.prod.js"></script>
   <script src="../Scripts/Libraries/AFrame/1.3.0/aframe.min.js"></script>
   <script src="../Scripts/Libraries/AFrame/Extras/6.1.1/aframe-extras.min.js"></script>
-  <script src="../Scripts/Libraries/MindAR/1.1.5/mindar-image-aframe.prod.js"></script>
+  <script src="../Scripts/Libraries/MindAR/1.2/mindar-image-aframe.prod.js"></script>
 
   <script src="../Scripts/Components/Fullscreen/platform.js"></script>
   <script src="../Scripts/Components/Fullscreen/aframe-always-fullscreen-component.js"></script>
@@ -23,7 +22,7 @@
   <a-scene
     mindar-image="imageTargetSrc: ../Targets/targets_three.mind; maxTrack: 2 filterMinCF:0.0001; filterBeta: 0.001"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" always-fullscreen="platform: all" update-resize stats>
+    device-orientation-permission-ui="enabled: false" update-resize stats>
     <a-assets>
 
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
@@ -57,10 +56,6 @@
         min-rotation-x=-30 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
         target="#TargetMaquetaArchivo"></a-interactive-model>
     </a-entity>
-
-    <div class="a-enter-vr embedded" aframe-injected>
-      <button id="fullscreenbutton"></button>
-    </div>
 
   </a-scene>
 
