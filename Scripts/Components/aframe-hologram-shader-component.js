@@ -8,31 +8,31 @@ AFRAME.registerComponent('hologram-shader', {
     },
     tick: function (time, timeDelta) {
         if (this.el.components.material && this.el.components.material.material && this.el.components.material.material.map) {
-            let new_offset = this.el.components.material.material.map.offset.y + this.data["offsetSpeed"] * timeDelta / 1000;
+            let newOffset = this.el.components.material.material.map.offset.y + this.data["offsetSpeed"] * timeDelta / 1000;
 
-            if (new_offset >= this.data["maxOffset"]) {
-                new_offset = this.data["minOffset"];
+            if (newOffset >= this.data["maxOffset"]) {
+                newOffset = this.data["minOffset"];
             }
 
-            this.el.components.material.material.map.offset.y = new_offset;
+            this.el.components.material.material.map.offset.y = newOffset;
 
-            let new_emissive = 0;
-            if (new_offset <= 0) {
-                new_emissive = this.map_range(new_offset, this.data["minOffset"], 0, this.data["minEmissive"], this.data["maxEmissive"]);
+            let newEmissive = 0;
+            if (newOffset <= 0) {
+                newEmissive = this.mapRange(newOffset, this.data["minOffset"], 0, this.data["minEmissive"], this.data["maxEmissive"]);
             } else {
-                new_emissive = this.map_range(new_offset, 0, this.data["maxOffset"], this.data["maxEmissive"], this.data["minEmissive"]);
+                newEmissive = this.mapRange(newOffset, 0, this.data["maxOffset"], this.data["maxEmissive"], this.data["minEmissive"]);
             }
 
-            if (new_emissive > this.data["maxEmissive"])
-                new_emissive = this.data["maxEmissive"];
-            if (new_emissive < this.data["minEmissive"])
-                new_emissive = this.data["minEmissive"];
-            this.el.components.material.material.emissiveIntensity = new_emissive;
+            if (newEmissive > this.data["maxEmissive"])
+                newEmissive = this.data["maxEmissive"];
+            if (newEmissive < this.data["minEmissive"])
+                newEmissive = this.data["minEmissive"];
+            this.el.components.material.material.emissiveIntensity = newEmissive;
         }
     },
-    map_range: function (current, in_min, in_max, out_min, out_max) {
-        let scale = (out_max - out_min) / (in_max - in_min)
-        let offset = -in_min * (out_max - out_min) / (in_max - in_min) + out_min
+    mapRange: function (current, inMin, inMax, outMin, outMax) {
+        let scale = (outMax - outMin) / (inMax - inMin)
+        let offset = -inMin * (outMax - outMin) / (inMax - inMin) + outMin
         return current * scale + offset
     }
 });

@@ -10,9 +10,9 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         'fullscreenExit': { type: 'string' }
     },
     init: function () {
-        this.is_playing = false;
-        this.video_src = document.querySelector(this.data['videoSrc']);
-        this.video_target = document.querySelector(this.data['videoTarget']);
+        this.isPlaying = false;
+        this.videoSrc = document.querySelector(this.data['videoSrc']);
+        this.videoTarget = document.querySelector(this.data['videoTarget']);
 
         this.thumbnail = document.createElement('a-image');
         this.thumbnail.setAttribute('src', this.data['thumbnailSrc']);
@@ -24,14 +24,14 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.thumbnail.setAttribute('transparent', false);
 
 
-        this.fullscreenButton_background = document.createElement('a-plane');
-        this.fullscreenButton_background.setAttribute('material', 'visible: false');
-        this.fullscreenButton_background.setAttribute('height', 0.2);
-        this.fullscreenButton_background.setAttribute('width', 0.2);
-        let new_pos_x = (this.data['videoWidth'] / 2 + this.fullscreenButton_background.getAttribute('width') / 2 + 0.01).toString();
-        let new_pos_y = (-(this.data['videoHeight'] / 2 + this.fullscreenButton_background.getAttribute('height') / 2 + 0.01)).toString();
-        this.fullscreenButton_background.setAttribute('position', new_pos_x + ' ' + new_pos_y + ' 0.01');
-        this.fullscreenButton_background.className = 'clickable';
+        this.fullscreenButtonBackground = document.createElement('a-plane');
+        this.fullscreenButtonBackground.setAttribute('material', 'visible: false');
+        this.fullscreenButtonBackground.setAttribute('height', 0.2);
+        this.fullscreenButtonBackground.setAttribute('width', 0.2);
+        let newPosX = (this.data['videoWidth'] / 2 + this.fullscreenButtonBackground.getAttribute('width') / 2 + 0.01).toString();
+        let newPosY = (-(this.data['videoHeight'] / 2 + this.fullscreenButtonBackground.getAttribute('height') / 2 + 0.01)).toString();
+        this.fullscreenButtonBackground.setAttribute('position', newPosX + ' ' + newPosY + ' 0.01');
+        this.fullscreenButtonBackground.className = 'clickable';
 
         let fullscreenButton = document.createElement('a-image');
         fullscreenButton.setAttribute('src', this.data['fullscreenButton']);
@@ -39,23 +39,23 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         fullscreenButton.setAttribute('width', 0.125);
         fullscreenButton.setAttribute('position', '0 0 0.01');
 
-        this.fullscreenButton_background.appendChild(fullscreenButton);
-        this.el.appendChild(this.fullscreenButton_background);
+        this.fullscreenButtonBackground.appendChild(fullscreenButton);
+        this.el.appendChild(this.fullscreenButtonBackground);
 
-        this.fullscreenButton_background.addEventListener("click", () => {
-            
+        this.fullscreenButtonBackground.addEventListener("click", () => {
+
             this.pauseVideo();
             this.el.setAttribute('visible', false);
 
             let fullscreenVid = document.createElement('video');
-            fullscreenVid.setAttribute('src', this.video_src.getAttribute('src'));
+            fullscreenVid.setAttribute('src', this.videoSrc.getAttribute('src'));
             fullscreenVid.setAttribute('controls', true);
             fullscreenVid.style.zIndex = 9998;
             fullscreenVid.style.position = 'absolute';
-            if(document.documentElement.clientHeight > document.documentElement.clientWidth){
+            if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
                 fullscreenVid.style.width = '95%';
                 fullscreenVid.style.height = 'auto';
-            }else{
+            } else {
                 fullscreenVid.style.width = 'auto';
                 fullscreenVid.style.height = '95%';
             }
@@ -94,14 +94,14 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
 
         });
 
-        this.play_button = document.createElement('a-image');
-        this.play_button.setAttribute('src', this.data['playButtonSrc']);
-        this.play_button.setAttribute('width', 0.25);
-        this.play_button.setAttribute('height', 0.25);
-        this.play_button.setAttribute('position', "0 0 0.01");
-        this.play_button.setAttribute('opacity', 0.8);
+        this.playButton = document.createElement('a-image');
+        this.playButton.setAttribute('src', this.data['playButtonSrc']);
+        this.playButton.setAttribute('width', 0.25);
+        this.playButton.setAttribute('height', 0.25);
+        this.playButton.setAttribute('position', "0 0 0.01");
+        this.playButton.setAttribute('opacity', 0.8);
 
-        this.thumbnail.appendChild(this.play_button);
+        this.thumbnail.appendChild(this.playButton);
         this.el.appendChild(this.thumbnail);
 
         this.video = document.createElement('a-video');
@@ -115,22 +115,22 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
 
         this.thumbnail.addEventListener('click', event => {
             this.playVideo();
-            this.is_playing = true;
+            this.isPlaying = true;
         });
 
         this.video.addEventListener('click', event => {
             this.pauseVideo();
-            this.is_playing = false;
+            this.isPlaying = false;
         });
 
-        this.video_target.addEventListener('targetFound', event => {
-            if (this.is_playing) {
+        this.videoTarget.addEventListener('targetFound', event => {
+            if (this.isPlaying) {
                 this.playVideo();
             }
         });
 
-        this.video_target.addEventListener('targetLost', event => {
-            this.video_src.pause();
+        this.videoTarget.addEventListener('targetLost', event => {
+            this.videoSrc.pause();
         });
 
     },
@@ -139,10 +139,10 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.thumbnail.className = '';
         this.video.setAttribute('visible', true);
         this.video.className = 'clickable';
-        this.video_src.play();
+        this.videoSrc.play();
     },
     pauseVideo: function () {
-        this.video_src.pause();
+        this.videoSrc.pause();
         this.video.setAttribute('visible', false);
         this.video.className = '';
         this.thumbnail.setAttribute('visible', true);

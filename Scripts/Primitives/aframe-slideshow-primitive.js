@@ -17,16 +17,16 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         'fullscreenExit': { type: 'string' }
     },
     init: function () {
-        this.current_slide_number = 0;
+        this.currentSlideNumber = 0;
         this.slides = document.querySelector(this.data['slidesSrc']);
-        this.current_slide = document.createElement('a-image');
-        this.el.appendChild(this.current_slide);
+        this.currentSlide = document.createElement('a-image');
+        this.el.appendChild(this.currentSlide);
 
-        this.fullscreenButton_background = document.createElement('a-plane');
-        this.fullscreenButton_background.setAttribute('material', 'visible: false');
-        this.fullscreenButton_background.setAttribute('height', 0.2);
-        this.fullscreenButton_background.setAttribute('width', 0.2);
-        this.fullscreenButton_background.className = 'clickable';
+        this.fullscreenButtonBackground = document.createElement('a-plane');
+        this.fullscreenButtonBackground.setAttribute('material', 'visible: false');
+        this.fullscreenButtonBackground.setAttribute('height', 0.2);
+        this.fullscreenButtonBackground.setAttribute('width', 0.2);
+        this.fullscreenButtonBackground.className = 'clickable';
 
         let fullscreenButton = document.createElement('a-image');
         fullscreenButton.setAttribute('src', this.data['fullscreenButton']);
@@ -34,16 +34,16 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         fullscreenButton.setAttribute('width', 0.125);
         fullscreenButton.setAttribute('position', '0 0 0.01');
 
-        this.fullscreenButton_background.appendChild(fullscreenButton);
-        this.el.appendChild(this.fullscreenButton_background);
+        this.fullscreenButtonBackground.appendChild(fullscreenButton);
+        this.el.appendChild(this.fullscreenButtonBackground);
 
 
-        this.fullscreenButton_background.addEventListener("click", () => {
+        this.fullscreenButtonBackground.addEventListener("click", () => {
 
             this.el.setAttribute('visible', false);
 
             let fullscreenImg = document.createElement('img');
-            fullscreenImg.setAttribute('src', this.current_slide.getAttribute('src'));
+            fullscreenImg.setAttribute('src', this.currentSlide.getAttribute('src'));
             fullscreenImg.style.zIndex = 9998;
             fullscreenImg.style.position = 'absolute';
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
@@ -87,68 +87,68 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             })
         });
 
-        this.left_arrow_background = document.createElement('a-plane');
-        this.left_arrow_background.setAttribute('material', 'visible: false');
-        this.left_arrow_background.setAttribute('height', 0.2);
-        this.left_arrow_background.className = 'clickable';
+        this.leftArrowBackground = document.createElement('a-plane');
+        this.leftArrowBackground.setAttribute('material', 'visible: false');
+        this.leftArrowBackground.setAttribute('height', 0.2);
+        this.leftArrowBackground.className = 'clickable';
 
-        let left_arrow = document.createElement('a-image');
-        left_arrow.setAttribute('src', this.data['leftArrowSrc']);
-        left_arrow.setAttribute('height', 0.125);
-        left_arrow.setAttribute('width', 0.125);
-        left_arrow.setAttribute('position', '0 0 0.01');
-        this.left_arrow_background.appendChild(left_arrow);
-        this.el.appendChild(this.left_arrow_background);
+        let leftArrow = document.createElement('a-image');
+        leftArrow.setAttribute('src', this.data['leftArrowSrc']);
+        leftArrow.setAttribute('height', 0.125);
+        leftArrow.setAttribute('width', 0.125);
+        leftArrow.setAttribute('position', '0 0 0.01');
+        this.leftArrowBackground.appendChild(leftArrow);
+        this.el.appendChild(this.leftArrowBackground);
 
-        this.left_arrow_background.addEventListener('click', () => { this.prev_slide(); });
+        this.leftArrowBackground.addEventListener('click', () => { this.prevSlide(); });
 
-        this.right_arrow_background = document.createElement('a-plane');
-        this.right_arrow_background.setAttribute('material', 'visible: false');
-        this.right_arrow_background.setAttribute('height', 0.2);
-        this.right_arrow_background.className = 'clickable';
+        this.rightArrowBackground = document.createElement('a-plane');
+        this.rightArrowBackground.setAttribute('material', 'visible: false');
+        this.rightArrowBackground.setAttribute('height', 0.2);
+        this.rightArrowBackground.className = 'clickable';
 
-        let right_arrow = document.createElement('a-image');
-        right_arrow.setAttribute('src', this.data['rightArrowSrc']);
-        right_arrow.setAttribute('height', 0.125);
-        right_arrow.setAttribute('width', 0.125);
-        right_arrow.setAttribute('position', '0 0 0.01');
-        this.right_arrow_background.appendChild(right_arrow);
-        this.el.appendChild(this.right_arrow_background);
+        let rightArrow = document.createElement('a-image');
+        rightArrow.setAttribute('src', this.data['rightArrowSrc']);
+        rightArrow.setAttribute('height', 0.125);
+        rightArrow.setAttribute('width', 0.125);
+        rightArrow.setAttribute('position', '0 0 0.01');
+        this.rightArrowBackground.appendChild(rightArrow);
+        this.el.appendChild(this.rightArrowBackground);
 
-        this.right_arrow_background.addEventListener('click', () => { this.next_side(); });
+        this.rightArrowBackground.addEventListener('click', () => { this.nextSide(); });
 
-        this.update_slide();
+        this.updateSlide();
 
     },
-    update_slide: function () {
-        let new_img = this.slides.children[this.current_slide_number];
-        this.current_slide.setAttribute('src', new_img.getAttribute('src'));
-        this.current_slide.setAttribute('width', new_img.getAttribute('width'));
-        this.current_slide.setAttribute('height', new_img.getAttribute('height'));
+    updateSlide: function () {
+        let newImg = this.slides.children[this.currentSlideNumber];
+        this.currentSlide.setAttribute('src', newImg.getAttribute('src'));
+        this.currentSlide.setAttribute('width', newImg.getAttribute('width'));
+        this.currentSlide.setAttribute('height', newImg.getAttribute('height'));
 
-        this.left_arrow_background.setAttribute('width', new_img.getAttribute('width') / 2 - 0.05);
-        this.left_arrow_background.setAttribute('position', (-new_img.getAttribute('width') / 4).toString() + ' -0.6 0.02');
+        this.leftArrowBackground.setAttribute('width', newImg.getAttribute('width') / 2 - 0.05);
+        this.leftArrowBackground.setAttribute('position', (-newImg.getAttribute('width') / 4).toString() + ' -0.6 0.02');
 
-        this.right_arrow_background.setAttribute('width', new_img.getAttribute('width') / 2 - 0.05);
-        this.right_arrow_background.setAttribute('position', (new_img.getAttribute('width') / 4).toString() + ' -0.6 0.02');
+        this.rightArrowBackground.setAttribute('width', newImg.getAttribute('width') / 2 - 0.05);
+        this.rightArrowBackground.setAttribute('position', (newImg.getAttribute('width') / 4).toString() + ' -0.6 0.02');
 
-        let new_pos_x = (new_img.getAttribute('width') / 2 + this.fullscreenButton_background.getAttribute('width') / 2 + 0.01).toString();
-        let new_pos_y = (-(new_img.getAttribute('height') / 2 + this.fullscreenButton_background.getAttribute('height') / 2)).toString();
-        this.fullscreenButton_background.setAttribute('position', new_pos_x + ' ' + new_pos_y + ' 0.01');
+        let newPosX = (newImg.getAttribute('width') / 2 + this.fullscreenButtonBackground.getAttribute('width') / 2 + 0.01).toString();
+        let newPosY = (-(newImg.getAttribute('height') / 2 + this.fullscreenButtonBackground.getAttribute('height') / 2)).toString();
+        this.fullscreenButtonBackground.setAttribute('position', newPosX + ' ' + newPosY + ' 0.01');
     },
-    next_side: function () {
-        this.current_slide_number = this.current_slide_number + 1;
-        if (this.current_slide_number >= this.slides.children.length) {
-            this.current_slide_number = 0;
+    nextSide: function () {
+        this.currentSlideNumber = this.currentSlideNumber + 1;
+        if (this.currentSlideNumber >= this.slides.children.length) {
+            this.currentSlideNumber = 0;
         }
-        this.update_slide();
+        this.updateSlide();
     },
-    prev_slide: function () {
-        this.current_slide_number = this.current_slide_number - 1;
-        if (this.current_slide_number < 0) {
-            this.current_slide_number = this.slides.children.length - 1;
+    prevSlide: function () {
+        this.currentSlideNumber = this.currentSlideNumber - 1;
+        if (this.currentSlideNumber < 0) {
+            this.currentSlideNumber = this.slides.children.length - 1;
         }
-        this.update_slide();
+        this.updateSlide();
     }
 });
 
