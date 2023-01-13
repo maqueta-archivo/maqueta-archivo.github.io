@@ -59,9 +59,9 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenExit.style.zIndex = 9999;
             fullscreenExit.style.position = 'absolute';
             fullscreenExit.style.width = 'auto';
-            fullscreenExit.style.height = '5%';
-            fullscreenExit.style.top = '3%';
-            fullscreenExit.style.left = '1.5%';
+            fullscreenExit.style.height = '9%';
+            fullscreenExit.style.top = '2%';
+            fullscreenExit.style.left = '1%';
 
             document.querySelector('body').appendChild(fullscreenExit);
 
