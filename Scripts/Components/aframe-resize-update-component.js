@@ -2,7 +2,7 @@ AFRAME.registerComponent('update-resize', {
     schema: {
     },
     init: function () {
-        window.onresize = function () {
+        window.addEventListener("resize", () => {
             if (document.querySelector('a-scene') &&
                 document.querySelector('a-scene').systems !== undefined &&
                 document.querySelector('a-scene').systems['mindar-image-system']) {
@@ -15,6 +15,6 @@ AFRAME.registerComponent('update-resize', {
                 document.querySelector('a-scene').systems['mindar-image-system']._startVideo()
             }
 
-        }
+        });
     }
 });

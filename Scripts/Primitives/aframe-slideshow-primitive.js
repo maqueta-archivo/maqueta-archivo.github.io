@@ -46,16 +46,26 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenImg.setAttribute('src', this.current_slide.getAttribute('src'));
             fullscreenImg.style.zIndex = 9998;
             fullscreenImg.style.position = 'absolute';
-            if(document.documentElement.clientHeight > document.documentElement.clientWidth){
+            if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
                 fullscreenImg.style.width = '95%';
                 fullscreenImg.style.height = 'auto';
-            }else{
+            } else {
                 fullscreenImg.style.width = 'auto';
                 fullscreenImg.style.height = '95%';
             }
             fullscreenImg.style.top = '50%';
             fullscreenImg.style.left = '50%';
             fullscreenImg.style.transform = 'translate(-50%, -50%)';
+
+            window.addEventListener("resize", () => {
+                if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+                    fullscreenImg.style.width = '95%';
+                    fullscreenImg.style.height = 'auto';
+                } else {
+                    fullscreenImg.style.width = 'auto';
+                    fullscreenImg.style.height = '95%';
+                }
+            });
 
             document.querySelector('body').appendChild(fullscreenImg);
 
@@ -66,7 +76,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenExit.style.width = 'auto';
             fullscreenExit.style.height = '9%';
             fullscreenExit.style.top = '2%';
-            fullscreenExit.style.left = '1%';
+            fullscreenExit.style.left = '2%';
 
             document.querySelector('body').appendChild(fullscreenExit);
 

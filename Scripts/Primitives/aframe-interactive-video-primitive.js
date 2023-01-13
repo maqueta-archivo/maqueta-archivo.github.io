@@ -63,6 +63,16 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenVid.style.left = '50%';
             fullscreenVid.style.transform = 'translate(-50%, -50%)';
 
+            window.addEventListener("resize", () => {
+                if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+                    fullscreenVid.style.width = '95%';
+                    fullscreenVid.style.height = 'auto';
+                } else {
+                    fullscreenVid.style.width = 'auto';
+                    fullscreenVid.style.height = '95%';
+                }
+            });
+
             document.querySelector('body').appendChild(fullscreenVid);
 
             let fullscreenExit = document.createElement('img');
@@ -72,7 +82,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenExit.style.width = 'auto';
             fullscreenExit.style.height = '9%';
             fullscreenExit.style.top = '2%';
-            fullscreenExit.style.left = '1%';
+            fullscreenExit.style.left = '2%';
 
             document.querySelector('body').appendChild(fullscreenExit);
 
