@@ -25,7 +25,7 @@
 <body>
 
   <a-scene
-    mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001"
+    mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001; missTolerance: 10"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false" update-resize inspector keyboard-shortcuts>
     <a-assets>
@@ -63,8 +63,8 @@
       raycaster="far: ${customFields.libVersion}; objects: .clickable">
     </a-camera>
 
-    <a-entity id="target" mindar-image-target="targetIndex: 0" trigger-visibility="entity: #MaquetaPamplona">
-      <a-obj-model id="MaquetaPamplona" rotation="0 0 0" position="5 -1 -12" scale="100 100 100" src="#pamplonaModelObj"
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-obj-model rotation="0 0 0" position="5 -1 -12" scale="100 100 100" src="#pamplonaModelObj"
         material="src: ./Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
         hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"
         animation="property: position; to: 5 -0.5 -12; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"></a-obj-model>
@@ -83,6 +83,7 @@
       </a-interactive-video>
     </a-entity>
   </a-scene>
+
 </body>
 
 </html>
