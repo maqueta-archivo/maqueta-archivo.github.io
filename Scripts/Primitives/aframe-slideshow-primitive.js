@@ -46,8 +46,13 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenImg.setAttribute('src', this.current_slide.getAttribute('src'));
             fullscreenImg.style.zIndex = 9998;
             fullscreenImg.style.position = 'absolute';
-            fullscreenImg.style.width = 'auto';
-            fullscreenImg.style.height = '95%';
+            if(document.documentElement.clientHeight > document.documentElement.clientWidth){
+                fullscreenImg.style.width = '95%';
+                fullscreenImg.style.height = 'auto';
+            }else{
+                fullscreenImg.style.width = 'auto';
+                fullscreenImg.style.height = '95%';
+            }
             fullscreenImg.style.top = '50%';
             fullscreenImg.style.left = '50%';
             fullscreenImg.style.transform = 'translate(-50%, -50%)';

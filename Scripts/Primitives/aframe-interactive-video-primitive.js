@@ -52,8 +52,13 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenVid.setAttribute('controls', true);
             fullscreenVid.style.zIndex = 9998;
             fullscreenVid.style.position = 'absolute';
-            fullscreenVid.style.width = 'auto';
-            fullscreenVid.style.height = '95%';
+            if(document.documentElement.clientHeight > document.documentElement.clientWidth){
+                fullscreenVid.style.width = '95%';
+                fullscreenVid.style.height = 'auto';
+            }else{
+                fullscreenVid.style.width = 'auto';
+                fullscreenVid.style.height = '95%';
+            }
             fullscreenVid.style.top = '50%';
             fullscreenVid.style.left = '50%';
             fullscreenVid.style.transform = 'translate(-50%, -50%)';
