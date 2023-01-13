@@ -8,7 +8,7 @@ AFRAME.registerComponent('update-resize', {
                 document.querySelector('a-scene').systems['mindar-image-system']) {
 
                 document.querySelector('a-scene').systems['mindar-image-system'].pause()
-                document.querySelector('video').remove();
+                document.querySelector('a-scene').systems['mindar-image-system'].video.remove();
                 Array.from(document.querySelectorAll('[mindar-image-target]')).forEach((element, index) => {
                     element.components['mindar-image-target'].updateWorldMatrix(null,)
                 });
