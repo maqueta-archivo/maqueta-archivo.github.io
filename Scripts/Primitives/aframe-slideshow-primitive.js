@@ -12,9 +12,13 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
     schema: {
         'slidesSrc': { type: 'string' },
         'leftArrowSrc': { type: 'string' },
+        'leftArrowPressSrc': { type: 'string' },
         'rightArrowSrc': { type: 'string' },
+        'rightArrowPressSrc': { type: 'string' },
         'fullscreenButton': { type: 'string' },
-        'fullscreenExit': { type: 'string' }
+        'fullscreenButtonPress': { type: 'string' },
+        'fullscreenExit': { type: 'string' },
+        'fullscreenExitPress': { type: 'string' }
     },
     init: function () {
         this.currentSlideNumber = 0;
@@ -66,6 +70,8 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
                     fullscreenImg.style.height = '95%';
                 }
             });
+            this.fullscreenButtonBackground.addEventListener('mouseup', () => { fullscreenButton.setAttribute('src', this.data['fullscreenButton']); });
+            this.fullscreenButtonBackground.addEventListener('mousedown', () => { fullscreenButton.setAttribute('src', this.data['fullscreenButtonPress']); });
 
             document.querySelector('body').appendChild(fullscreenImg);
 
@@ -80,11 +86,13 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
 
             document.querySelector('body').appendChild(fullscreenExit);
 
-            fullscreenExit.addEventListener('click', event => {
-                fullscreenImg.remove();
+            fullscreenExit.addEventListener('mouseup', () => {
+                fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExit']).getAttribute('src')); fullscreenImg.remove();
                 fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
-            })
+            });
+            fullscreenExit.addEventListener('mousedown', () => { fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExitPress']).getAttribute('src')); });
+
         });
 
         this.leftArrowBackground = document.createElement('a-plane');
@@ -101,6 +109,8 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.el.appendChild(this.leftArrowBackground);
 
         this.leftArrowBackground.addEventListener('click', () => { this.prevSlide(); });
+        this.leftArrowBackground.addEventListener('mouseup', () => { leftArrow.setAttribute('src', this.data['leftArrowSrc']); });
+        this.leftArrowBackground.addEventListener('mousedown', () => { leftArrow.setAttribute('src', this.data['leftArrowPressSrc']); });
 
         this.rightArrowBackground = document.createElement('a-plane');
         this.rightArrowBackground.setAttribute('material', 'visible: false');
@@ -116,6 +126,8 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.el.appendChild(this.rightArrowBackground);
 
         this.rightArrowBackground.addEventListener('click', () => { this.nextSide(); });
+        this.rightArrowBackground.addEventListener('mouseup', () => { rightArrow.setAttribute('src', this.data['rightArrowSrc']); });
+        this.rightArrowBackground.addEventListener('mousedown', () => { rightArrow.setAttribute('src', this.data['rightArrowPressSrc']); });
 
         this.updateSlide();
 
@@ -159,9 +171,13 @@ AFRAME.registerPrimitive('a-interactive-slideshow', {
 
     mappings: {
         'slides-src': 'a-slideshow-nested-elements-.slidesSrc',
-        'left-arrow-src': 'a-slideshow-nested-elements-.leftArrowSrc',
-        'right-arrow-src': 'a-slideshow-nested-elements-.rightArrowSrc',
+        'left-arrow': 'a-slideshow-nested-elements-.leftArrowSrc',
+        'left-arrow-press': 'a-slideshow-nested-elements-.leftArrowPressSrc',
+        'right-arrow': 'a-slideshow-nested-elements-.rightArrowSrc',
+        'right-arrow-press': 'a-slideshow-nested-elements-.rightArrowPressSrc',
         'fullscreen-button': 'a-slideshow-nested-elements-.fullscreenButton',
-        'fullscreen-exit': 'a-slideshow-nested-elements-.fullscreenExit'
+        'fullscreen-button-press': 'a-slideshow-nested-elements-.fullscreenButtonPress',
+        'fullscreen-exit': 'a-slideshow-nested-elements-.fullscreenExit',
+        'fullscreen-exit-press': 'a-slideshow-nested-elements-.fullscreenExitPress'
     }
 });

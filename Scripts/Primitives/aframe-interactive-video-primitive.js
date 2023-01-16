@@ -7,7 +7,9 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         'thumbnailSrc': { type: 'string' },
         'playButtonSrc': { type: 'string' },
         'fullscreenButton': { type: 'string' },
-        'fullscreenExit': { type: 'string' }
+        'fullscreenButtonPress': { type: 'string' },
+        'fullscreenExit': { type: 'string' },
+        'fullscreenExitPress': { type: 'string' }
     },
     init: function () {
         this.isPlaying = false;
@@ -82,17 +84,22 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenExit.style.width = 'auto';
             fullscreenExit.style.height = '9%';
             fullscreenExit.style.top = '2%';
-            fullscreenExit.style.left = '2%';
+            fullscreenExit.style.left = '1.5%';
 
             document.querySelector('body').appendChild(fullscreenExit);
 
-            fullscreenExit.addEventListener('click', event => {
+
+            fullscreenExit.addEventListener('mouseup', () => {
+                fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExit']).getAttribute('src'));
                 fullscreenVid.remove();
                 fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
-            })
+            });
+            fullscreenExit.addEventListener('mousedown', () => { fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExitPress']).getAttribute('src')); });
 
         });
+        this.fullscreenButtonBackground.addEventListener('mouseup', () => { fullscreenButton.setAttribute('src', this.data['fullscreenButton']); });
+        this.fullscreenButtonBackground.addEventListener('mousedown', () => { fullscreenButton.setAttribute('src', this.data['fullscreenButtonPress']); });
 
         this.playButton = document.createElement('a-image');
         this.playButton.setAttribute('src', this.data['playButtonSrc']);
@@ -112,7 +119,6 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.video.setAttribute('visible', false);
 
         this.el.appendChild(this.video);
-
         this.thumbnail.addEventListener('click', event => {
             this.playVideo();
             this.isPlaying = true;
@@ -163,6 +169,8 @@ AFRAME.registerPrimitive('a-interactive-video', {
         'thumbnail-src': 'a-interactive-video-nested-elements-.thumbnailSrc',
         'play-button-src': 'a-interactive-video-nested-elements-.playButtonSrc',
         'fullscreen-button': 'a-interactive-video-nested-elements-.fullscreenButton',
-        'fullscreen-exit': 'a-interactive-video-nested-elements-.fullscreenExit'
+        'fullscreen-button-press': 'a-interactive-video-nested-elements-.fullscreenButtonPress',
+        'fullscreen-exit': 'a-interactive-video-nested-elements-.fullscreenExit',
+        'fullscreen-exit-press': 'a-interactive-video-nested-elements-.fullscreenExitPress'
     }
 });

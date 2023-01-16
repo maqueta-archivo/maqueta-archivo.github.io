@@ -32,9 +32,13 @@
       <a-asset-item id="pamplonaModelObj" src="./Models/Pamplona_3D_Low_V00.obj"></a-asset-item>
 
       <img id="LeftArrow" src="./Images/GUI/left_icon.png">
+      <img id="LeftArrowPress" src="./Images/GUI/left_press_icon.png">
       <img id="RightArrow" src="./Images/GUI/right_icon.png">
+      <img id="RightArrowPress" src="./Images/GUI/right_press_icon.png">
       <img id="Fullscreen" src="./Images/GUI/fullscreen_icon.png">
+      <img id="FullscreenPress" src="./Images/GUI/fullscreen_press_icon.png">
       <img id="ExitIcon" src="./Images/GUI/close_icon.png">
+      <img id="ExitIconPress" src="./Images/GUI/close_press_icon.png">
 
       <a-slideshow-gallery id="SlideshowPlazaToros">
         <a-slide-img src="./Images/PlazaToros/01-DFN_IMG4674.jpg" width="1.352" height="1"></a-slide-img>
@@ -71,15 +75,18 @@
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 1">
-      <a-interactive-slideshow slides-src="#SlideshowPlazaToros" left-arrow-src="#LeftArrow"
-        right-arrow-src="#RightArrow" fullscreen-button="#Fullscreen" fullscreen-exit="#ExitIcon">
+      <a-interactive-slideshow slides-src="#SlideshowPlazaToros" left-arrow="#LeftArrow"
+        left-arrow-press="#LeftArrowPress" right-arrow="#RightArrow" right-arrow-press="#RightArrowPress"
+        fullscreen-button="#Fullscreen" fullscreen-button-press="#FullscreenPress" fullscreen-exit="#ExitIcon"
+        fullscreen-exit-press="#ExitIconPress" scale="2 2 2">
       </a-interactive-slideshow>
     </a-entity>
 
     <a-entity id="TargetVideo" mindar-image-target="targetIndex: 2">
       <a-interactive-video video-target="#TargetVideo" video-src="#VideoArchivo" video-width=1.777 video-height=1
         thumbnail-src="#VideoArchivoThumbnail" play-button-src="#VideoThumbnailPlayButton"
-        fullscreen-button="#Fullscreen" fullscreen-exit="#ExitIcon">
+        fullscreen-button="#Fullscreen" fullscreen-button-press="#FullscreenPress" fullscreen-exit="#ExitIcon"
+        fullscreen-exit-press="#ExitIconPress">
       </a-interactive-video>
     </a-entity>
   </a-scene>
