@@ -26,28 +26,21 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.thumbnail.setAttribute('transparent', false);
 
 
-        this.fullscreenButtonBackground = document.createElement('a-plane');
-        this.fullscreenButtonBackground.setAttribute('material', 'visible: false');
-        this.fullscreenButtonBackground.setAttribute('height', 0.2);
-        this.fullscreenButtonBackground.setAttribute('width', 0.2);
-        let newPosX = (this.data['videoWidth'] / 2 + this.fullscreenButtonBackground.getAttribute('width') / 2 + 0.01).toString();
-        let newPosY = (-(this.data['videoHeight'] / 2 + this.fullscreenButtonBackground.getAttribute('height') / 2 + 0.01)).toString();
-        this.fullscreenButtonBackground.setAttribute('position', newPosX + ' ' + newPosY + ' 0.01');
-        this.fullscreenButtonBackground.className = 'clickable';
+        this.fullscreenButton = document.createElement('img');
+        this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButton']).getAttribute('src'));
+        this.fullscreenButton.style.zIndex = 9999;
+        this.fullscreenButton.style.position = 'absolute';
+        this.fullscreenButton.style.width = 'auto';
+        this.fullscreenButton.style.height = '9%';
+        this.fullscreenButton.style.top = '2%';
+        this.fullscreenButton.style.left = '2%';
+        this.fullscreenButton.classList.add("fullscreen");
 
-        let fullscreenButton = document.createElement('a-image');
-        fullscreenButton.setAttribute('src', this.data['fullscreenButton']);
-        fullscreenButton.setAttribute('height', 0.125);
-        fullscreenButton.setAttribute('width', 0.125);
-        fullscreenButton.setAttribute('position', '0 0 0.01');
-
-        this.fullscreenButtonBackground.appendChild(fullscreenButton);
-        this.el.appendChild(this.fullscreenButtonBackground);
-
-        this.fullscreenButtonBackground.addEventListener("click", () => {
+        this.fullscreenButton.addEventListener("click", () => {
 
             this.pauseVideo();
             this.el.setAttribute('visible', false);
+            this.fullscreenButton.hidden = true;
 
             let fullscreenVid = document.createElement('video');
             fullscreenVid.setAttribute('src', this.videoSrc.getAttribute('src'));
@@ -55,23 +48,24 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenVid.style.zIndex = 9998;
             fullscreenVid.style.position = 'absolute';
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                fullscreenVid.style.width = '95%';
+                fullscreenVid.style.width = '90%';
                 fullscreenVid.style.height = 'auto';
             } else {
                 fullscreenVid.style.width = 'auto';
-                fullscreenVid.style.height = '95%';
+                fullscreenVid.style.height = '90%';
             }
             fullscreenVid.style.top = '50%';
             fullscreenVid.style.left = '50%';
             fullscreenVid.style.transform = 'translate(-50%, -50%)';
+            fullscreenVid.classList.add("fullscreen");
 
             window.addEventListener("resize", () => {
                 if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                    fullscreenVid.style.width = '95%';
+                    fullscreenVid.style.width = '90%';
                     fullscreenVid.style.height = 'auto';
                 } else {
                     fullscreenVid.style.width = 'auto';
-                    fullscreenVid.style.height = '95%';
+                    fullscreenVid.style.height = '90%';
                 }
             });
 
@@ -84,7 +78,8 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenExit.style.width = 'auto';
             fullscreenExit.style.height = '9%';
             fullscreenExit.style.top = '2%';
-            fullscreenExit.style.left = '1.5%';
+            fullscreenExit.style.left = '2%';
+            fullscreenExit.classList.add("fullscreen");
 
             document.querySelector('body').appendChild(fullscreenExit);
 
@@ -94,12 +89,14 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
                 fullscreenVid.remove();
                 fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
+                this.fullscreenButton.hidden = false;
+                this.playVideo();
             });
             fullscreenExit.addEventListener('mousedown', () => { fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExitPress']).getAttribute('src')); });
 
         });
-        this.fullscreenButtonBackground.addEventListener('mouseup', () => { fullscreenButton.setAttribute('src', this.data['fullscreenButton']); });
-        this.fullscreenButtonBackground.addEventListener('mousedown', () => { fullscreenButton.setAttribute('src', this.data['fullscreenButtonPress']); });
+        this.fullscreenButton.addEventListener('mouseup', () => { this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButton']).getAttribute('src')); });
+        this.fullscreenButton.addEventListener('mousedown', () => { this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src')); });
 
         this.playButton = document.createElement('a-image');
         this.playButton.setAttribute('src', this.data['playButtonSrc']);
@@ -130,12 +127,21 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         });
 
         this.videoTarget.addEventListener('targetFound', event => {
+            var fullscreenElements = Array.from(document.getElementsByClassName("fullscreen"));
+            for (let index = 0; index < fullscreenElements.length; index++) {
+                fullscreenElements[index].remove();
+            }
+            this.el.setAttribute('visible', true);
+            document.querySelector('body').appendChild(this.fullscreenButton);
+            this.fullscreenButton.hidden = false;
+            document.querySelector('body').appendChild(this.fullscreenButton);
             if (this.isPlaying) {
                 this.playVideo();
             }
         });
 
         this.videoTarget.addEventListener('targetLost', event => {
+            this.fullscreenButton.remove();
             this.videoSrc.pause();
         });
 

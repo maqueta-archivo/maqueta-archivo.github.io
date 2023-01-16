@@ -78,8 +78,8 @@
         animation="property: position; to: 5 -0.5 -12; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"></a-obj-model>
     </a-entity>
 
-    <a-entity mindar-image-target="targetIndex: 1">
-      <a-interactive-slideshow slides-src="#SlideshowPlazaToros" left-arrow="#LeftArrow"
+    <a-entity id="TargetSlides" mindar-image-target="targetIndex: 1">
+      <a-interactive-slideshow slides-target="#TargetSlides" slides-src="#SlideshowPlazaToros" left-arrow="#LeftArrow"
         left-arrow-press="#LeftArrowPress" right-arrow="#RightArrow" right-arrow-press="#RightArrowPress"
         fullscreen-button="#Fullscreen" fullscreen-button-press="#FullscreenPress" fullscreen-exit="#ExitIcon"
         fullscreen-exit-press="#ExitIconPress" scale="2 2 2">
