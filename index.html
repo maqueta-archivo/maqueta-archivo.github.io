@@ -18,6 +18,8 @@
   <script src="./Scripts/Primitives/aframe-slideshow-primitive.js"></script>
   <script src="./Scripts/Primitives/aframe-interactive-video-primitive.js"></script>
   <script src="./Scripts/Components/aframe-hologram-shader-component.js"></script>
+  <script src="/Scripts/Primitives/aframe-interactive-model-primitive.js" type="module"></script>
+  <script src="/Scripts/Components/aframe-trigger-visible-component.js"></script>
 
   <link rel="stylesheet" href="./Style/style.css">
 </head>
@@ -25,11 +27,13 @@
 <body>
 
   <a-scene
-    mindar-image="imageTargetSrc: ./Targets/targets_three.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001; missTolerance: 10"
+    mindar-image="imageTargetSrc: ./Targets/targets_full.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001; missTolerance: 10"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: false" update-resize inspector keyboard-shortcuts>
     <a-assets>
       <a-asset-item id="pamplonaModelObj" src="./Models/Pamplona_3D_Low_V00.obj"></a-asset-item>
+      <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
+      <a-asset-item id="SelloArchivo" src="../Models/Sello_3D_01.glb"></a-asset-item>
 
       <img id="LeftArrow" src="./Images/GUI/left_icon.png">
       <img id="LeftArrowPress" src="./Images/GUI/left_press_icon.png">
@@ -89,6 +93,26 @@
         fullscreen-exit-press="#ExitIconPress">
       </a-interactive-video>
     </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 3" id="TargetMaquetaArchivo">
+      <a-interactive-model model="#EdificioArchivo" nested-scale="1 1 1" rotation-sensibility=3 max-rotation-x=30
+        min-rotation-x=-30 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
+        target="#TargetMaquetaArchivo"></a-interactive-model>
+    </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 4" id="TargetSelloArchivo">
+      <a-interactive-model model="#SelloArchivo" rotation-sensibility=2 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
+        nested-scale="0.2 0.2 0.2" target="#TargetSelloArchivo"></a-interactive-model>
+    </a-entity>
+
+    <a-entity mindar-image-target="targetIndex: 5" trigger-visibility="entity: #MaquetaPamplona">
+    </a-entity>
+
+    <a-obj-model id="MaquetaPamplona" rotation="20 0 0" position="5 -1 -12" scale="100 100 100" src="#pamplonaModelObj"
+      material="src: ../Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
+      hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"
+      animation="property: position; to: 5 -0.5 -12; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"
+      visible="false"></a-obj-model>
   </a-scene>
 
 </body>
