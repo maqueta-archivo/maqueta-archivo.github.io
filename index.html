@@ -71,6 +71,9 @@
       raycaster="far: ${customFields.libVersion}; objects: .clickable">
     </a-camera>
 
+    <a-entity light="type: ambient; color: #BBB; intensity: 0.2"></a-entity>
+    <a-entity light="type: directional; color: #FFF; intensity: 0.6;" position="-1 1 0"></a-entity>
+
     <a-entity mindar-image-target="targetIndex: 5">
       <a-obj-model rotation="0 0 0" position="5 -1 -12" scale="100 100 100" src="#pamplonaModelObj"
         material="src: ./Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
@@ -96,8 +99,8 @@
 
     <a-entity mindar-image-target="targetIndex: 3" id="TargetMaquetaArchivo">
       <a-interactive-model model="#EdificioArchivo" nested-scale="1 1 1" rotation-sensibility=3 max-rotation-x=30
-        min-rotation-x=-30 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5
-        target="#TargetMaquetaArchivo"></a-interactive-model>
+        min-rotation-x=-30 zoom-sensibility=1 max-zoom=1.5 min-zoom=0.5 target="#TargetMaquetaArchivo"></a-interactive-model>
+        
     </a-entity>
 
     <a-entity mindar-image-target="targetIndex: 4" id="TargetSelloArchivo">
