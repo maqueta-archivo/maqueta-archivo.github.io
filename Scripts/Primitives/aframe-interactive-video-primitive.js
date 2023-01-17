@@ -31,7 +31,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.fullscreenButton.style.zIndex = 9999;
         this.fullscreenButton.style.position = 'absolute';
         this.fullscreenButton.style.width = 'auto';
-        this.fullscreenButton.style.height = '9%';
+        this.fullscreenButton.style.height = '10%';
         this.fullscreenButton.style.top = '2%';
         this.fullscreenButton.style.left = '2%';
         this.fullscreenButton.classList.add("fullscreen");
@@ -48,11 +48,11 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenVid.style.zIndex = 9998;
             fullscreenVid.style.position = 'absolute';
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                fullscreenVid.style.width = '90%';
+                fullscreenVid.style.width = '85%';
                 fullscreenVid.style.height = 'auto';
             } else {
                 fullscreenVid.style.width = 'auto';
-                fullscreenVid.style.height = '90%';
+                fullscreenVid.style.height = '85%';
             }
             fullscreenVid.style.top = '50%';
             fullscreenVid.style.left = '50%';
@@ -61,11 +61,11 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
 
             window.addEventListener("resize", () => {
                 if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                    fullscreenVid.style.width = '90%';
+                    fullscreenVid.style.width = '85%';
                     fullscreenVid.style.height = 'auto';
                 } else {
                     fullscreenVid.style.width = 'auto';
-                    fullscreenVid.style.height = '90%';
+                    fullscreenVid.style.height = '85%';
                 }
             });
 
@@ -76,7 +76,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             fullscreenExit.style.zIndex = 9999;
             fullscreenExit.style.position = 'absolute';
             fullscreenExit.style.width = 'auto';
-            fullscreenExit.style.height = '9%';
+            fullscreenExit.style.height = '10%';
             fullscreenExit.style.top = '2%';
             fullscreenExit.style.left = '2%';
             fullscreenExit.classList.add("fullscreen");

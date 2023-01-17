@@ -33,7 +33,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.fullscreenButton.style.zIndex = 9999;
         this.fullscreenButton.style.position = 'absolute';
         this.fullscreenButton.style.width = 'auto';
-        this.fullscreenButton.style.height = '9%';
+        this.fullscreenButton.style.height = '10%';
         this.fullscreenButton.style.top = '2%';
         this.fullscreenButton.style.left = '2%';
         this.fullscreenButton.classList.add("fullscreen");
@@ -50,11 +50,11 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenImg.style.zIndex = 9998;
             fullscreenImg.style.position = 'absolute';
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                fullscreenImg.style.width = '90%';
+                fullscreenImg.style.width = '85%';
                 fullscreenImg.style.height = 'auto';
             } else {
                 fullscreenImg.style.width = 'auto';
-                fullscreenImg.style.height = '90%';
+                fullscreenImg.style.height = '85%';
             }
             fullscreenImg.style.top = '50%';
             fullscreenImg.style.left = '50%';
@@ -63,11 +63,11 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
 
             window.addEventListener("resize", () => {
                 if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                    fullscreenImg.style.width = '90%';
+                    fullscreenImg.style.width = '85%';
                     fullscreenImg.style.height = 'auto';
                 } else {
                     fullscreenImg.style.width = 'auto';
-                    fullscreenImg.style.height = '90%';
+                    fullscreenImg.style.height = '85%';
                 }
             });
 
@@ -78,7 +78,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenExit.style.zIndex = 9999;
             fullscreenExit.style.position = 'absolute';
             fullscreenExit.style.width = 'auto';
-            fullscreenExit.style.height = '9%';
+            fullscreenExit.style.height = '10%';
             fullscreenExit.style.top = '2%';
             fullscreenExit.style.left = '2%';
             fullscreenExit.classList.add("fullscreen");
@@ -104,7 +104,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.leftArrow.style.zIndex = 9999;
         this.leftArrow.style.position = 'absolute';
         this.leftArrow.style.width = 'auto';
-        this.leftArrow.style.height = '10%';
+        this.leftArrow.style.height = '15%';
         this.leftArrow.style.bottom = '2%';
         this.leftArrow.style.left = '10%';
         this.leftArrow.classList.add("fullscreen");
@@ -118,7 +118,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.rightArrow.style.zIndex = 9999;
         this.rightArrow.style.position = 'absolute';
         this.rightArrow.style.width = 'auto';
-        this.rightArrow.style.height = '10%';
+        this.rightArrow.style.height = '15%';
         this.rightArrow.style.bottom = '2%';
         this.rightArrow.style.right = '10%';
         this.rightArrow.classList.add("fullscreen");
