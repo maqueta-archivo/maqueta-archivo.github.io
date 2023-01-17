@@ -29,7 +29,7 @@
   <a-scene
     mindar-image="imageTargetSrc: ./Targets/targets_full.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001; missTolerance: 10"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" update-resize inspector keyboard-shortcuts>
+    device-orientation-permission-ui="enabled: false" update-resize inspector keyboard-shortcuts stats>
     <a-assets>
       <a-asset-item id="pamplonaModelObj" src="./Models/Pamplona_3D_V01.obj"></a-asset-item>
       <a-asset-item id="EdificioArchivo" src="../Models/Edificio_Archivo_3D_Test.glb"></a-asset-item>
@@ -71,8 +71,8 @@
       raycaster="far: ${customFields.libVersion}; objects: .clickable">
     </a-camera>
 
-    <a-entity light="type: ambient; color: #BBB; intensity: 0.2"></a-entity>
-    <a-entity light="type: directional; color: #FFF; intensity: 0.6;" position="-1 1 0"></a-entity>
+    <!-- <a-entity light="type: ambient; color: #BBB; intensity: 0.2"></a-entity>
+    <a-entity light="type: directional; color: #FFF; intensity: 0.6;" position="-1 1 0"></a-entity> -->
 
     <a-entity mindar-image-target="targetIndex: 5">
       <a-obj-model rotation="0 0 0" position="5 -1 -12" scale="100 100 100" src="#pamplonaModelObj"
