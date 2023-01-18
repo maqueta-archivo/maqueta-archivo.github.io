@@ -27,7 +27,9 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
 
 
         this.fullscreenButton = document.createElement('img');
-        this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButton']).getAttribute('src'));
+        let fullscreenButtonSrc = document.querySelector(this.data['fullscreenButton']).getAttribute('src');
+        let fullscreenButtonPressSrc = document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src');
+        this.fullscreenButton.setAttribute('src', fullscreenButtonSrc);
         this.fullscreenButton.style.zIndex = 9999;
         this.fullscreenButton.style.position = 'absolute';
         this.fullscreenButton.style.width = 'auto';
@@ -72,7 +74,9 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             document.querySelector('body').appendChild(fullscreenVid);
 
             let fullscreenExit = document.createElement('img');
-            fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExit']).getAttribute('src'));
+            let fullscreenExitSrc = document.querySelector(this.data['fullscreenExit']).getAttribute('src');
+            let fullscreenExitPressSrc = document.querySelector(this.data['fullscreenExitPress']).getAttribute('src');
+            fullscreenExit.setAttribute('src', fullscreenExitSrc);
             fullscreenExit.style.zIndex = 9999;
             fullscreenExit.style.position = 'absolute';
             fullscreenExit.style.width = 'auto';
@@ -84,20 +88,32 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             document.querySelector('body').appendChild(fullscreenExit);
 
 
-            fullscreenExit.addEventListener('mouseup', () => {
-                fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExit']).getAttribute('src'));
+            fullscreenExit.addEventListener('click', () => {
                 fullscreenVid.remove();
                 fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
                 this.fullscreenButton.hidden = false;
                 this.playVideo();
             });
-            fullscreenExit.addEventListener('mousedown', () => { fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExitPress']).getAttribute('src')); });
+            
+            fullscreenExit.addEventListener('pointerup', () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+            fullscreenExit.addEventListener("touchend", () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+            fullscreenExit.addEventListener("mouseup", () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+
+            fullscreenExit.addEventListener('pointerdown', () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
+            fullscreenExit.addEventListener("touchstart", () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
+            fullscreenExit.addEventListener("mousedown", () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
 
         });
-        this.fullscreenButton.addEventListener('mouseup', () => { this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButton']).getAttribute('src')); });
-        this.fullscreenButton.addEventListener('mousedown', () => { this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src')); });
+        
+        this.fullscreenButton.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenButton, fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener("touchend", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener("mouseup", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonSrc) });
 
+        this.fullscreenButton.addEventListener('pointerdown', () => { this.changeSrc(this.fullscreenButton, fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener("touchstart", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonPressSrc) });
+        
         this.playButton = document.createElement('a-image');
         this.playButton.setAttribute('src', this.data['playButtonSrc']);
         this.playButton.setAttribute('width', 0.25);
@@ -159,6 +175,9 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.video.className = '';
         this.thumbnail.setAttribute('visible', true);
         this.thumbnail.className = 'clickable';
+    },
+    changeSrc: function (element, src) {
+        element.setAttribute('src', src);
     }
 });
 

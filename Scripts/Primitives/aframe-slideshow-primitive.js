@@ -29,7 +29,9 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.el.appendChild(this.currentSlide);
 
         this.fullscreenButton = document.createElement('img');
-        this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButton']).getAttribute('src'));
+        let fullscreenButtonSrc = document.querySelector(this.data['fullscreenButton']).getAttribute('src');
+        let fullscreenButtonPressSrc = document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src');
+        this.fullscreenButton.setAttribute('src', fullscreenButtonSrc);
         this.fullscreenButton.style.zIndex = 9999;
         this.fullscreenButton.style.position = 'absolute';
         this.fullscreenButton.style.width = 'auto';
@@ -74,7 +76,9 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             document.querySelector('body').appendChild(fullscreenImg);
 
             let fullscreenExit = document.createElement('img');
-            fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExit']).getAttribute('src'));
+            let fullscreenExitSrc = document.querySelector(this.data['fullscreenExit']).getAttribute('src');
+            let fullscreenExitPressSrc = document.querySelector(this.data['fullscreenExitPress']).getAttribute('src');
+            fullscreenExit.setAttribute('src', fullscreenExitSrc);
             fullscreenExit.style.zIndex = 9999;
             fullscreenExit.style.position = 'absolute';
             fullscreenExit.style.width = 'auto';
@@ -85,22 +89,37 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
 
             document.querySelector('body').appendChild(fullscreenExit);
 
-            fullscreenExit.addEventListener('mouseup', () => {
-                fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExit']).getAttribute('src')); fullscreenImg.remove();
+            fullscreenExit.addEventListener('click', () => {
                 fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
                 this.fullscreenButton.hidden = false;
                 this.leftArrow.hidden = false;
                 this.rightArrow.hidden = false;
+                fullscreenImg.remove();
             });
-            fullscreenExit.addEventListener('mousedown', () => { fullscreenExit.setAttribute('src', document.querySelector(this.data['fullscreenExitPress']).getAttribute('src')); });
+
+            fullscreenExit.addEventListener('pointerup', () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+            fullscreenExit.addEventListener("touchend", () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+            fullscreenExit.addEventListener("mouseup", () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+
+            fullscreenExit.addEventListener('pointerdown', () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
+            fullscreenExit.addEventListener("touchstart", () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
+            fullscreenExit.addEventListener("mousedown", () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
 
         });
-        this.fullscreenButton.addEventListener('mouseup', () => { this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButton']).getAttribute('src')); });
-        this.fullscreenButton.addEventListener('mousedown', () => { this.fullscreenButton.setAttribute('src', document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src')); });
+
+        this.fullscreenButton.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenButton, fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener("touchend", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener("mouseup", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonSrc) });
+
+        this.fullscreenButton.addEventListener('pointerdown', () => { this.changeSrc(this.fullscreenButton, fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener("touchstart", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenButton, fullscreenButtonPressSrc) });
 
         this.leftArrow = document.createElement('img');
-        this.leftArrow.setAttribute('src', document.querySelector(this.data['leftArrowSrc']).getAttribute('src'));
+        let leftArrowSrc = document.querySelector(this.data['leftArrowSrc']).getAttribute('src');
+        let leftArrowPressSrc = document.querySelector(this.data['leftArrowPressSrc']).getAttribute('src');
+        this.leftArrow.setAttribute('src', leftArrowSrc);
         this.leftArrow.style.zIndex = 9999;
         this.leftArrow.style.position = 'absolute';
         this.leftArrow.style.width = 'auto';
@@ -110,11 +129,19 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.leftArrow.classList.add("fullscreen");
 
         this.leftArrow.addEventListener('click', () => { this.prevSlide(); });
-        this.leftArrow.addEventListener('mouseup', () => { this.leftArrow.setAttribute('src', document.querySelector(this.data['leftArrowSrc']).getAttribute('src')); });
-        this.leftArrow.addEventListener('mousedown', () => { this.leftArrow.setAttribute('src', document.querySelector(this.data['leftArrowPressSrc']).getAttribute('src')); });
+
+        this.leftArrow.addEventListener('pointerup', () => { this.changeSrc(this.leftArrow, leftArrowSrc) });
+        this.leftArrow.addEventListener("touchend", () => { this.changeSrc(this.leftArrow, leftArrowSrc) });
+        this.leftArrow.addEventListener("mouseup", () => { this.changeSrc(this.leftArrow, leftArrowSrc) });
+
+        this.leftArrow.addEventListener('pointerdown', () => { this.changeSrc(this.leftArrow, leftArrowPressSrc) });
+        this.leftArrow.addEventListener("touchstart", () => { this.changeSrc(this.leftArrow, leftArrowPressSrc) });
+        this.leftArrow.addEventListener("mousedown", () => { this.changeSrc(this.leftArrow, leftArrowPressSrc) });
 
         this.rightArrow = document.createElement('img');
-        this.rightArrow.setAttribute('src', document.querySelector(this.data['rightArrowSrc']).getAttribute('src'));
+        let rightArrowSrc = document.querySelector(this.data['rightArrowSrc']).getAttribute('src');
+        let rightArrowPressSrc = document.querySelector(this.data['rightArrowPressSrc']).getAttribute('src');
+        this.rightArrow.setAttribute('src', rightArrowSrc);
         this.rightArrow.style.zIndex = 9999;
         this.rightArrow.style.position = 'absolute';
         this.rightArrow.style.width = 'auto';
@@ -124,12 +151,18 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.rightArrow.classList.add("fullscreen");
 
         this.rightArrow.addEventListener('click', () => { this.prevSlide(); });
-        this.rightArrow.addEventListener('mouseup', () => { this.rightArrow.setAttribute('src', document.querySelector(this.data['rightArrowSrc']).getAttribute('src')); });
-        this.rightArrow.addEventListener('mousedown', () => { this.rightArrow.setAttribute('src', document.querySelector(this.data['rightArrowPressSrc']).getAttribute('src')); });
+
+        this.rightArrow.addEventListener('pointerup', () => { this.changeSrc(this.rightArrow, rightArrowSrc) });
+        this.rightArrow.addEventListener("touchend", () => { this.changeSrc(this.rightArrow, rightArrowSrc) });
+        this.rightArrow.addEventListener("mouseup", () => { this.changeSrc(this.rightArrow, rightArrowSrc) });
+
+        this.rightArrow.addEventListener('pointerdown', () => { this.changeSrc(this.rightArrow, rightArrowPressSrc) });
+        this.rightArrow.addEventListener("touchstart", () => { this.changeSrc(this.rightArrow, rightArrowPressSrc) });
+        this.rightArrow.addEventListener("mousedown", () => { this.changeSrc(this.rightArrow, rightArrowPressSrc) });
 
         this.updateSlide();
 
-        
+
         this.slidesTarget.addEventListener('targetFound', event => {
             var fullscreenElements = Array.from(document.getElementsByClassName("fullscreen"));
             for (let index = 0; index < fullscreenElements.length; index++) {
@@ -153,9 +186,12 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
     },
     updateSlide: function () {
         let newImg = this.slides.children[this.currentSlideNumber];
+        this.currentSlide.setAttribute('visible', false);
         this.currentSlide.setAttribute('src', newImg.getAttribute('src'));
         this.currentSlide.setAttribute('width', newImg.getAttribute('width'));
         this.currentSlide.setAttribute('height', newImg.getAttribute('height'));
+        setTimeout(() => { this.currentSlide.setAttribute('visible', true); }, 100)
+
     },
     nextSide: function () {
         this.currentSlideNumber = this.currentSlideNumber + 1;
@@ -170,6 +206,9 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             this.currentSlideNumber = this.slides.children.length - 1;
         }
         this.updateSlide();
+    },
+    changeSrc: function (element, src) {
+        element.setAttribute('src', src);
     }
 });
 
