@@ -190,7 +190,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.currentSlide.setAttribute('src', newImg.getAttribute('src'));
         this.currentSlide.setAttribute('width', newImg.getAttribute('width'));
         this.currentSlide.setAttribute('height', newImg.getAttribute('height'));
-        setTimeout(() => { this.currentSlide.setAttribute('visible', true); }, 100)
+        this.currentSlide.setAttribute('visible', true);
 
     },
     nextSide: function () {
