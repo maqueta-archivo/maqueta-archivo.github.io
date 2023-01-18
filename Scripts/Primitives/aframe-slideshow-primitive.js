@@ -150,7 +150,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.rightArrow.style.right = '10%';
         this.rightArrow.classList.add("fullscreen");
 
-        this.rightArrow.addEventListener('click', () => { this.prevSlide(); });
+        this.rightArrow.addEventListener('click', () => { this.nextSide(); });
 
         this.rightArrow.addEventListener('pointerup', () => { this.changeSrc(this.rightArrow, rightArrowSrc) });
         this.rightArrow.addEventListener("touchend", () => { this.changeSrc(this.rightArrow, rightArrowSrc) });
