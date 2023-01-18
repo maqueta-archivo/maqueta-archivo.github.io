@@ -35,7 +35,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.fullscreenButton.style.zIndex = 9999;
         this.fullscreenButton.style.position = 'absolute';
         this.fullscreenButton.style.width = 'auto';
-        this.fullscreenButton.style.height = '10%';
+        this.fullscreenButton.style.height = '15%';
         this.fullscreenButton.style.top = '2%';
         this.fullscreenButton.style.left = '2%';
         this.fullscreenButton.classList.add("fullscreen");
@@ -82,7 +82,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             fullscreenExit.style.zIndex = 9999;
             fullscreenExit.style.position = 'absolute';
             fullscreenExit.style.width = 'auto';
-            fullscreenExit.style.height = '10%';
+            fullscreenExit.style.height = '15%';
             fullscreenExit.style.top = '2%';
             fullscreenExit.style.left = '2%';
             fullscreenExit.classList.add("fullscreen");
