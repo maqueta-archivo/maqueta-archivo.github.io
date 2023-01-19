@@ -23,17 +23,17 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.thumbnail.className = 'clickable';
         this.thumbnail.setAttribute('transparent', false);
 
-        isPlaying = false;
-        videoTarget = document.querySelector(this.data['videoTarget']);
+        this.isPlaying = false;
+        this.videoTarget = document.querySelector(this.data['videoTarget']);
 
-        playButton = document.createElement('a-image');
-        playButton.setAttribute('src', this.data['playButtonSrc']);
-        playButton.setAttribute('width', 0.25);
-        playButton.setAttribute('height', 0.25);
-        playButton.setAttribute('position', "0 0 0.01");
-        playButton.setAttribute('opacity', 0.8);
+        this.playButton = document.createElement('a-image');
+        this.playButton.setAttribute('src', this.data['playButtonSrc']);
+        this.playButton.setAttribute('width', 0.25);
+        this.playButton.setAttribute('height', 0.25);
+        this.playButton.setAttribute('position', "0 0 0.01");
+        this.playButton.setAttribute('opacity', 0.8);
 
-        this.thumbnail.appendChild(playButton);
+        this.thumbnail.appendChild(this.playButton);
         this.el.appendChild(this.thumbnail);
 
         this.video = document.createElement('a-video');
@@ -46,128 +46,129 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.el.appendChild(this.video);
         this.thumbnail.addEventListener('click', event => {
             this.playVideo();
-            isPlaying = true;
+            this.isPlaying = true;
         });
 
         this.video.addEventListener('click', event => {
             this.pauseVideo();
-            isPlaying = false;
+            this.isPlaying = false;
         });
 
-        videoTarget.addEventListener('targetFound', event => {
+        this.videoTarget.addEventListener('targetFound', event => {
             var fullscreenElements = Array.from(document.getElementsByClassName("fullscreen"));
             for (let index = 0; index < fullscreenElements.length; index++) {
                 fullscreenElements[index].remove();
             }
             this.el.setAttribute('visible', true);
-            document.querySelector('body').appendChild(fullscreenButton);
-            fullscreenButton.hidden = false;
-            document.querySelector('body').appendChild(fullscreenButton);
-            if (isPlaying) {
+            document.querySelector('body').appendChild(this.fullscreenButton);
+            this.fullscreenButton.hidden = false;
+            document.querySelector('body').appendChild(this.fullscreenButton);
+            if (this.isPlaying) {
                 this.playVideo();
             }
         });
 
-        videoTarget.addEventListener('targetLost', event => {
-            fullscreenButton.remove();
+        this.videoTarget.addEventListener('targetLost', event => {
+            this.fullscreenButton.remove();
             this.videoSrc.pause();
         });
 
-        fullscreenButton = document.createElement('img');
-        let fullscreenButtonSrc = document.querySelector(this.data['fullscreenButton']).getAttribute('src');
-        let fullscreenButtonPressSrc = document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src');
-        fullscreenButton.setAttribute('src', fullscreenButtonSrc);
-        fullscreenButton.style.zIndex = 9999;
-        fullscreenButton.style.position = 'absolute';
-        fullscreenButton.style.width = 'auto';
+        this.fullscreenButton = document.createElement('img');
+        this.fullscreenButtonSrc = document.querySelector(this.data['fullscreenButton']).getAttribute('src');
+        this.fullscreenButtonPressSrc = document.querySelector(this.data['fullscreenButtonPress']).getAttribute('src');
+        this.fullscreenButton.setAttribute('src', this.fullscreenButtonSrc);
+        this.fullscreenButton.style.zIndex = 9999;
+        this.fullscreenButton.style.position = 'absolute';
+        this.fullscreenButton.style.width = 'auto';
         if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-            fullscreenButton.style.height = '7%';
+            this.fullscreenButton.style.height = '7%';
         } else {
-            fullscreenButton.style.height = '15%';
+            this.fullscreenButton.style.height = '15%';
         }
-        fullscreenButton.style.top = '2%';
-        fullscreenButton.style.left = '2%';
-        fullscreenButton.classList.add("fullscreen");
+        this.fullscreenButton.style.top = '2%';
+        this.fullscreenButton.style.left = '2%';
+        this.fullscreenButton.classList.add("fullscreen");
 
-        fullscreenButton.addEventListener("click", () => {
+        this.fullscreenButton.addEventListener("click", () => {
 
             this.pauseVideo();
             this.el.setAttribute('visible', false);
-            fullscreenButton.hidden = true;
+            this.fullscreenButton.hidden = true;
 
-            let fullscreenVid = document.createElement('video');
-            fullscreenVid.setAttribute('src', this.videoSrc.getAttribute('src'));
-            fullscreenVid.setAttribute('controls', true);
-            fullscreenVid.style.zIndex = 9998;
-            fullscreenVid.style.position = 'absolute';
+            this.fullscreenVid = document.createElement('video');
+            this.fullscreenVid.setAttribute('src', this.videoSrc.getAttribute('src'));
+            this.fullscreenVid.setAttribute('controls', true);
+            this.fullscreenVid.style.zIndex = 9998;
+            this.fullscreenVid.style.position = 'absolute';
+            
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                fullscreenVid.style.width = '85%';
-                fullscreenVid.style.height = 'auto';
+                this.fullscreenVid.style.width = '85%';
+                this.fullscreenVid.style.height = 'auto';
             } else {
-                fullscreenVid.style.width = 'auto';
-                fullscreenVid.style.height = '85%';
+                this.fullscreenVid.style.width = 'auto';
+                this.fullscreenVid.style.height = '85%';
             }
-            fullscreenVid.style.top = '50%';
-            fullscreenVid.style.left = '50%';
-            fullscreenVid.style.transform = 'translate(-50%, -50%)';
-            fullscreenVid.classList.add("fullscreen");
+            this.fullscreenVid.style.top = '50%';
+            this.fullscreenVid.style.left = '50%';
+            this.fullscreenVid.style.transform = 'translate(-50%, -50%)';
+            this.fullscreenVid.classList.add("fullscreen");
 
             window.addEventListener("resize", () => {
                 if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                    fullscreenVid.style.width = '85%';
-                    fullscreenVid.style.height = 'auto';
+                    this.fullscreenVid.style.width = '85%';
+                    this.fullscreenVid.style.height = 'auto';
                 } else {
-                    fullscreenVid.style.width = 'auto';
-                    fullscreenVid.style.height = '85%';
+                    this.fullscreenVid.style.width = 'auto';
+                    this.fullscreenVid.style.height = '85%';
                 }
             });
 
-            document.querySelector('body').appendChild(fullscreenVid);
+            document.querySelector('body').appendChild(this.fullscreenVid);
 
-            let fullscreenExit = document.createElement('img');
-            let fullscreenExitSrc = document.querySelector(this.data['fullscreenExit']).getAttribute('src');
-            let fullscreenExitPressSrc = document.querySelector(this.data['fullscreenExitPress']).getAttribute('src');
-            fullscreenExit.setAttribute('src', fullscreenExitSrc);
-            fullscreenExit.style.zIndex = 9999;
-            fullscreenExit.style.position = 'absolute';
-            fullscreenExit.style.width = 'auto';
+            this.fullscreenExit = document.createElement('img');
+            this.fullscreenExitSrc = document.querySelector(this.data['fullscreenExit']).getAttribute('src');
+            this.fullscreenExitPressSrc = document.querySelector(this.data['fullscreenExitPress']).getAttribute('src');
+            this.fullscreenExit.setAttribute('src', this.fullscreenExitSrc);
+            this.fullscreenExit.style.zIndex = 9999;
+            this.fullscreenExit.style.position = 'absolute';
+            this.fullscreenExit.style.width = 'auto';
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
-                fullscreenExit.style.height = '7%';
+                this.fullscreenExit.style.height = '7%';
             } else {
-                fullscreenExit.style.height = '15%';
+                this.fullscreenExit.style.height = '15%';
             }
-            fullscreenExit.style.top = '2%';
-            fullscreenExit.style.left = '2%';
-            fullscreenExit.classList.add("fullscreen");
+            this.fullscreenExit.style.top = '2%';
+            this.fullscreenExit.style.left = '2%';
+            this.fullscreenExit.classList.add("fullscreen");
 
-            document.querySelector('body').appendChild(fullscreenExit);
+            document.querySelector('body').appendChild(this.fullscreenExit);
 
 
-            fullscreenExit.addEventListener('click', () => {
-                fullscreenVid.remove();
-                fullscreenExit.remove();
+            this.fullscreenExit.addEventListener('click', () => {
+                this.fullscreenVid.remove();
+                this.fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
-                fullscreenButton.hidden = false;
+                this.fullscreenButton.hidden = false;
                 this.playVideo();
             });
             
-            fullscreenExit.addEventListener('pointerup', () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
-            fullscreenExit.addEventListener("touchend", () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
-            fullscreenExit.addEventListener("mouseup", () => { this.changeSrc(fullscreenExit, fullscreenExitSrc) });
+            this.fullscreenExit.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
+            this.fullscreenExit.addEventListener("touchend", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
+            this.fullscreenExit.addEventListener("mouseup", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
 
-            fullscreenExit.addEventListener('pointerdown', () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
-            fullscreenExit.addEventListener("touchstart", () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
-            fullscreenExit.addEventListener("mousedown", () => { this.changeSrc(fullscreenExit, fullscreenExitPressSrc) });
+            this.fullscreenExit.addEventListener('pointerdown', () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitPressSrc) });
+            this.fullscreenExit.addEventListener("touchstart", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitPressSrc) });
+            this.fullscreenExit.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitPressSrc) });
 
         });
         
-        fullscreenButton.addEventListener('pointerup', () => { this.changeSrc(fullscreenButton, fullscreenButtonSrc) });
-        fullscreenButton.addEventListener("touchend", () => { this.changeSrc(fullscreenButton, fullscreenButtonSrc) });
-        fullscreenButton.addEventListener("mouseup", () => { this.changeSrc(fullscreenButton, fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener("touchend", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonSrc) });
+        this.fullscreenButton.addEventListener("mouseup", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonSrc) });
 
-        fullscreenButton.addEventListener('pointerdown', () => { this.changeSrc(fullscreenButton, fullscreenButtonPressSrc) });
-        fullscreenButton.addEventListener("touchstart", () => { this.changeSrc(fullscreenButton, fullscreenButtonPressSrc) });
-        fullscreenButton.addEventListener("mousedown", () => { this.changeSrc(fullscreenButton, fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener('pointerdown', () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener("touchstart", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
+        this.fullscreenButton.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
 
     },
     playVideo: function () {
