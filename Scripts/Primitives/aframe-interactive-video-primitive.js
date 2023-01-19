@@ -100,7 +100,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             this.fullscreenVid.setAttribute('controls', true);
             this.fullscreenVid.style.zIndex = 9998;
             this.fullscreenVid.style.position = 'absolute';
-            
+
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
                 this.fullscreenVid.style.width = '85%';
                 this.fullscreenVid.style.height = 'auto';
@@ -151,7 +151,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
                 this.fullscreenButton.hidden = false;
                 this.playVideo();
             });
-            
+
             this.fullscreenExit.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
             this.fullscreenExit.addEventListener("touchend", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
             this.fullscreenExit.addEventListener("mouseup", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
@@ -161,7 +161,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             this.fullscreenExit.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitPressSrc) });
 
         });
-        
+
         this.fullscreenButton.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonSrc) });
         this.fullscreenButton.addEventListener("touchend", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonSrc) });
         this.fullscreenButton.addEventListener("mouseup", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonSrc) });
@@ -169,6 +169,14 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.fullscreenButton.addEventListener('pointerdown', () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
         this.fullscreenButton.addEventListener("touchstart", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
         this.fullscreenButton.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
+
+        window.addEventListener("resize", () => {
+            if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
+                this.fullscreenButton.style.height = '7%';
+            } else {
+                this.fullscreenButton.style.height = '15%';
+            }
+        });
 
     },
     playVideo: function () {
