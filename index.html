@@ -25,7 +25,7 @@
   <a-scene
     mindar-image="imageTargetSrc: ./Targets/targets_full.mind; maxTrack: 1 filterMinCF:0.0001; filterBeta: 0.0001; missTolerance: 10"
     color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
-    device-orientation-permission-ui="enabled: false" update-resize inspector keyboard-shortcuts>
+    device-orientation-permission-ui="enabled: false" update-resize>
     <a-assets>
       <a-asset-item id="pamplonaModelObj" src="./Models/Pamplona_3D_V01.obj"></a-asset-item>
       <a-asset-item id="EdificioArchivo" src="./Models/Edificio_Archivo_3D_V00.glb"></a-asset-item>
@@ -115,7 +115,7 @@
   <select id="selectCamera" hidden>
   </select>
 
-  <textarea id="debug" ></textarea>
+  <textarea id="debug"></textarea>
 
   <script>
     let videoSourcesSelect = document.querySelector("#selectCamera");
@@ -164,6 +164,7 @@
     function listCameras() {
       debug.innerHTML = debug.innerHTML + "listCameras" + '\n'
       MediaStreamHelper.requestStream().then(function (stream) {
+        debug.innerHTML = debug.innerHTML + "stream requested" + '\n'
         // Store Current Stream
         MediaStreamHelper._stream = stream;
 
@@ -178,6 +179,7 @@
         });
 
         if (video === undefined) {
+          debug.innerHTML = debug.innerHTML + "video === undefined" + '\n'
           if (videoSourcesSelect.options.length > 0) {
             videoSourcesSelect.hidden = false;
           } else {
@@ -190,6 +192,8 @@
 
         // You can now list the devices using the Helper
         MediaStreamHelper.getDevices().then((devices) => {
+
+          debug.innerHTML = debug.innerHTML + "get devices" + '\n'
           // Iterate over all the list of devices (InputDeviceInfo and MediaDeviceInfo)
           devices.forEach((device) => {
             let option = new Option();
@@ -207,12 +211,14 @@
 
           if (videoSourcesSelect.options.length > 0) {
             videoSourcesSelect.hidden = false;
+            debug.innerHTML = debug.innerHTML + "list set" + '\n'
           } else {
             setTimeout(listCameras, 500);
           }
 
         }).catch(function (e) {
           console.log(e.name + ": " + e.message);
+        debug.innerHTML = debug.innerHTML + "get devices error" + '\n'
 
           if (videoSourcesSelect.options.length > 0) {
             videoSourcesSelect.hidden = false;
@@ -222,6 +228,7 @@
         });
       }).catch(function (err) {
         console.error(err);
+        debug.innerHTML = debug.innerHTML + "request stream error" + '\n'
 
         if (videoSourcesSelect.options.length > 0) {
           videoSourcesSelect.hidden = false;
@@ -236,7 +243,7 @@
       document.querySelector('a-scene').removeEventListener("arReady", listCamerasFirstCall);
     }
     document.querySelector('a-scene').addEventListener("arReady", listCamerasFirstCall);
-    
+
 
     videoSourcesSelect.onchange = function () {
       MediaStreamHelper.requestStream().then(function (stream) {
