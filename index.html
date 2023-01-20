@@ -112,7 +112,7 @@
       visible="false"></a-obj-model>
   </a-scene>
 
-  <select id="selectCamera">
+  <select id="selectCamera" hidden>
   </select>
 
   <script>
@@ -154,11 +154,7 @@
 
     // Request streams (audio and video), ask for permission and display streams in the video element
     const sceneEl = document.querySelector('a-scene');
-    sceneEl.addEventListener("arReady", (event) => {
-
-      if(videoSourcesSelect.options.length > 0)
-        return;
-
+    let cameraListInterval = setInterval(() => {
       MediaStreamHelper.requestStream().then(function (stream) {
         // Store Current Stream
         MediaStreamHelper._stream = stream;
@@ -190,7 +186,11 @@
                 break;
             }
 
-            //console.log(device);
+            if (videoSourcesSelect.options.length > 0) {
+              clearInterval(cameraListInterval);
+              videoSourcesSelect.hidden = false;
+            }
+
           });
         }).catch(function (e) {
           console.log(e.name + ": " + e.message);
@@ -199,7 +199,7 @@
         console.error(err);
       });
 
-    });
+    }, 500);
 
     videoSourcesSelect.onchange = function () {
       MediaStreamHelper.requestStream().then(function (stream) {
