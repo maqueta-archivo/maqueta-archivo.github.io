@@ -67,12 +67,13 @@
       raycaster="far: ${customFields.libVersion}; objects: .clickable">
     </a-camera>
 
-    <!-- <a-entity mindar-image-target="targetIndex: 5">
-      <a-obj-model rotation="0 0 0" position="5 -1 -12" scale="100 100 100" src="#pamplonaModelObj"
-        material="src: ./Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
-        hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"
-        animation="property: position; to: 5 -0.5 -12; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"></a-obj-model>
-    </a-entity> -->
+    <a-entity mindar-image-target="targetIndex: 0" trigger-visibility="entity: #MaquetaPamplona">
+    </a-entity>
+    <a-obj-model id="MaquetaPamplona" rotation="15 0 0" position="3 0 -20" scale="100 100 100" src="#pamplonaModelObj"
+      material="src: ../Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
+      hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"
+      animation="property: position; to: 3 0.5 -20; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"
+      visible="false"></a-obj-model>
 
     <a-entity id="TargetSlides" mindar-image-target="targetIndex: 1">
       <a-interactive-slideshow slides-target="#TargetSlides" slides-src="#SlideshowPlazaToros" left-arrow="#LeftArrow"
@@ -101,165 +102,8 @@
       <a-interactive-model model="#SelloArchivo" rotation-sensibility=2 zoom-sensibility=0.75 max-zoom=1.5 min-zoom=0.5
         nested-scale="0.2 0.2 0.2" target="#TargetSelloArchivo"></a-interactive-model>
     </a-entity>
-
-    <a-entity mindar-image-target="targetIndex: 0" trigger-visibility="entity: #MaquetaPamplona">
-    </a-entity>
-
-    <a-obj-model id="MaquetaPamplona" rotation="15 0 0" position="3 0 -20" scale="100 100 100" src="#pamplonaModelObj"
-      material="src: ../Textures/Pamplona_3D_Color2.png; opacity: 0.99; wireframe: false; wireframeLinewidth: 2; offset: 0 0.5; emissive: #4ABFFF; emissiveIntensity: 1"
-      hologram-shader="offsetSpeed: 0.25; minEmissive: 0.3; maxEmissive: 1; minOffset: -1; maxOffset: 1"
-      animation="property: position; to: 3 0.5 -20; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"
-      visible="false"></a-obj-model>
+    
   </a-scene>
-
-  <!-- <select id="selectCamera" hidden>
-  </select> -->
-
-  <!-- <textarea id="debug"></textarea> -->
-
-  <!-- <script>
-    let videoSourcesSelect = document.querySelector("#selectCamera");
-    //let debug = document.querySelector("#debug");
-
-    videoSourcesSelect.style.zIndex = 9999;
-    videoSourcesSelect.style.position = 'absolute';
-    videoSourcesSelect.style.top = '2%';
-    videoSourcesSelect.style.right = '2%';
-
-    /*
-    debug.style.zIndex = 9999;
-    debug.style.position = 'absolute';
-    debug.style.width = '80%';
-    debug.style.height = '80%'
-    debug.style.top = '10%';
-    debug.style.right = '10%';
-    */
-
-    // Create Helper to ask for permission and list devices
-    let MediaStreamHelper = {
-      // Property of the object to store the current stream
-      _stream: null,
-      // This method will return the promise to list the real devices
-      getDevices: function () {
-        return navigator.mediaDevices.enumerateDevices();
-      },
-      // Request user permissions to access the camera and video
-      requestStream: function () {
-        if (this._stream) {
-          this._stream.getTracks().forEach(track => {
-            track.stop();
-          });
-        }
-
-        const videoSource = videoSourcesSelect.value;
-        const constraints = {
-          video: {
-            deviceId: videoSource ? { exact: videoSource } : undefined
-          }
-        };
-
-        return navigator.mediaDevices.getUserMedia(constraints);
-      }
-    }
-
-    // Request streams (audio and video), ask for permission and display streams in the video element
-    function listCameras() {
-      //debug.innerHTML = debug.innerHTML + "listCameras" + '\n'
-      MediaStreamHelper.requestStream().then(function (stream) {
-        //debug.innerHTML = debug.innerHTML + "stream requested" + '\n'
-        // Store Current Stream
-        MediaStreamHelper._stream = stream;
-
-        // Select the Current Streams in the list of devices
-        videoSourcesSelect.selectedIndex = [...videoSourcesSelect.options].findIndex(option => option.text === stream.getVideoTracks()[0].label);
-
-        let video;
-        document.querySelectorAll("video").forEach(element => {
-          if (element.id == '') {
-            video = element;
-          }
-        });
-
-        if (video === undefined) {
-          //debug.innerHTML = debug.innerHTML + "video === undefined" + '\n'
-          if (videoSourcesSelect.options.length > 0) {
-            videoSourcesSelect.hidden = false;
-          } else {
-            setTimeout(listCameras, 500);
-          }
-          return;
-        }
-
-        video.srcObject = stream;
-
-        // You can now list the devices using the Helper
-        MediaStreamHelper.getDevices().then((devices) => {
-
-          //debug.innerHTML = debug.innerHTML + "get devices" + '\n'
-          // Iterate over all the list of devices (InputDeviceInfo and MediaDeviceInfo)
-          devices.forEach((device) => {
-            let option = new Option();
-            option.value = device.deviceId;
-
-            // According to the type of media device
-            switch (device.kind) {
-              // Append device to list of Cameras
-              case "videoinput":
-                option.text = device.label || `Camera ${videoSourcesSelect.length + 1}`;
-                videoSourcesSelect.appendChild(option);
-                break;
-            }
-          });
-
-          if (videoSourcesSelect.options.length > 0) {
-            videoSourcesSelect.hidden = false;
-            //debug.innerHTML = debug.innerHTML + "list set" + '\n'
-          } else {
-            setTimeout(listCameras, 500);
-          }
-
-        }).catch(function (e) {
-          console.log(e.name + ": " + e.message);
-        //debug.innerHTML = debug.innerHTML + "get devices error" + '\n'
-
-          if (videoSourcesSelect.options.length > 0) {
-            videoSourcesSelect.hidden = false;
-          } else {
-            setTimeout(listCameras, 500);
-          }
-        });
-      }).catch(function (err) {
-        console.error(err);
-        //debug.innerHTML = debug.innerHTML + "request stream error" + '\n'
-
-        if (videoSourcesSelect.options.length > 0) {
-          videoSourcesSelect.hidden = false;
-        } else {
-          setTimeout(listCameras, 500);
-        }
-      });
-    }
-
-    function listCamerasFirstCall() {
-      document.querySelector('a-scene').removeEventListener("arReady", listCamerasFirstCall);
-      listCameras();
-    }
-    document.querySelector('a-scene').addEventListener("arReady", listCamerasFirstCall);
-
-
-    videoSourcesSelect.onchange = function () {
-      MediaStreamHelper.requestStream().then(function (stream) {
-        let video;
-        document.querySelectorAll("video").forEach(element => {
-          if (element.id == '') {
-            video = element;
-          }
-        });
-        video.srcObject = stream;
-        MediaStreamHelper._stream = stream;
-      });
-    }
-  </script> -->
 
 </body>
 
