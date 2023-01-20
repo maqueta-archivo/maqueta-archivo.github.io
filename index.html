@@ -222,7 +222,11 @@
       });
     }
 
-    setTimeout(listCameras, 500);
+    const sceneEl = document.querySelector('a-scene');
+    sceneEl.addEventListener("arReady", (event) => {
+      setTimeout(listCameras, 500);
+    });
+    
 
     videoSourcesSelect.onchange = function () {
       MediaStreamHelper.requestStream().then(function (stream) {
