@@ -111,6 +111,7 @@
       animation="property: position; to: 3 0.5 -20; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate"
       visible="false"></a-obj-model>
   </a-scene>
+
   <select id="selectCamera">
   </select>
 
@@ -149,7 +150,7 @@
 
         return navigator.mediaDevices.getUserMedia(constraints);
       }
-    };
+    }
 
     // Request streams (audio and video), ask for permission and display streams in the video element
     setTimeout(() => {
@@ -184,7 +185,7 @@
                 break;
             }
 
-            console.log(device);
+            //console.log(device);
           });
         }).catch(function (e) {
           console.log(e.name + ": " + e.message);
@@ -193,7 +194,7 @@
         console.error(err);
       });
 
-    }, 10)
+    }, 10);
 
     videoSourcesSelect.onchange = function () {
       MediaStreamHelper.requestStream().then(function (stream) {
@@ -207,7 +208,9 @@
         MediaStreamHelper._stream = stream;
         video.srcObject = stream;
       });
-    };
+    }
   </script>
+
 </body>
+
 </html>
