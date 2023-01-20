@@ -168,6 +168,8 @@
             video = element;
           }
         });
+        if(video === undefined)
+          return;
         video.srcObject = stream;
 
         // You can now list the devices using the Helper
