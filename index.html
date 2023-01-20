@@ -222,10 +222,11 @@
       });
     }
 
-    const sceneEl = document.querySelector('a-scene');
-    sceneEl.addEventListener("arReady", (event) => {
-      setTimeout(listCameras, 500);
-    });
+    function listCamerasFirstCall() {
+      listCameras();
+      document.querySelector('a-scene').removeEventListener("arReady", listCamerasFirstCall);
+    }
+    document.querySelector('a-scene').addEventListener("arReady", listCamerasFirstCall);
     
 
     videoSourcesSelect.onchange = function () {
