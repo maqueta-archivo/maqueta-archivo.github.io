@@ -167,8 +167,16 @@
             video = element;
           }
         });
-        if (video === undefined)
+
+        if (video === undefined) {
+          if (videoSourcesSelect.options.length > 0) {
+            videoSourcesSelect.hidden = false;
+          } else {
+            setTimeout(listCameras, 500);
+          }
           return;
+        }
+
         video.srcObject = stream;
 
         // You can now list the devices using the Helper
@@ -188,20 +196,32 @@
             }
           });
 
-          console.log(videoSourcesSelect.options.length)
           if (videoSourcesSelect.options.length > 0) {
             videoSourcesSelect.hidden = false;
           } else {
             setTimeout(listCameras, 500);
           }
-          
+
         }).catch(function (e) {
           console.log(e.name + ": " + e.message);
+
+          if (videoSourcesSelect.options.length > 0) {
+            videoSourcesSelect.hidden = false;
+          } else {
+            setTimeout(listCameras, 500);
+          }
         });
       }).catch(function (err) {
         console.error(err);
+
+        if (videoSourcesSelect.options.length > 0) {
+          videoSourcesSelect.hidden = false;
+        } else {
+          setTimeout(listCameras, 500);
+        }
       });
     }
+
     setTimeout(listCameras, 500);
 
     videoSourcesSelect.onchange = function () {
