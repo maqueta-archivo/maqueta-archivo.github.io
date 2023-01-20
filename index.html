@@ -115,15 +115,23 @@
   <select id="selectCamera" hidden>
   </select>
 
+  <textarea id="debug" ></textarea>
+
   <script>
     let videoSourcesSelect = document.querySelector("#selectCamera");
+    let debug = document.querySelector("#debug");
 
     videoSourcesSelect.style.zIndex = 9999;
     videoSourcesSelect.style.position = 'absolute';
-    //videoSourcesSelect.style.height = '15%';
-    //videoSourcesSelect.style.width = 'auto';
     videoSourcesSelect.style.top = '2%';
     videoSourcesSelect.style.right = '2%';
+
+    debug.style.zIndex = 9999;
+    debug.style.position = 'absolute';
+    debug.style.width = '80%';
+    debug.style.height = '80%'
+    debug.style.top = '10%';
+    debug.style.right = '10%';
 
     // Create Helper to ask for permission and list devices
     let MediaStreamHelper = {
@@ -154,6 +162,7 @@
 
     // Request streams (audio and video), ask for permission and display streams in the video element
     function listCameras() {
+      debug.innerHTML = debug.innerHTML + "listCameras" + '\n'
       MediaStreamHelper.requestStream().then(function (stream) {
         // Store Current Stream
         MediaStreamHelper._stream = stream;
