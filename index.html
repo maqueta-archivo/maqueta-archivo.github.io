@@ -153,7 +153,12 @@
     }
 
     // Request streams (audio and video), ask for permission and display streams in the video element
-    setTimeout(() => {
+    const sceneEl = document.querySelector('a-scene');
+    sceneEl.addEventListener("arReady", (event) => {
+
+      if(videoSourcesSelect.options.length > 0)
+        return;
+
       MediaStreamHelper.requestStream().then(function (stream) {
         // Store Current Stream
         MediaStreamHelper._stream = stream;
@@ -194,7 +199,7 @@
         console.error(err);
       });
 
-    }, 10);
+    });
 
     videoSourcesSelect.onchange = function () {
       MediaStreamHelper.requestStream().then(function (stream) {
@@ -206,7 +211,6 @@
         });
         video.srcObject = stream;
         MediaStreamHelper._stream = stream;
-        video.srcObject = stream;
       });
     }
   </script>
