@@ -23,7 +23,8 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.thumbnail.className = 'clickable';
         this.thumbnail.setAttribute('transparent', false);
 
-        this.isPlaying = false;
+        this.videoIsPlaying = false;
+
         this.videoTarget = document.querySelector(this.data['videoTarget']);
 
         this.playButton = document.createElement('a-image');
@@ -46,12 +47,12 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.el.appendChild(this.video);
         this.thumbnail.addEventListener('click', event => {
             this.playVideo();
-            this.isPlaying = true;
+            this.videoIsPlaying = true;
         });
 
         this.video.addEventListener('click', event => {
             this.pauseVideo();
-            this.isPlaying = false;
+            this.videoIsPlaying = false;
         });
 
         this.videoTarget.addEventListener('targetFound', event => {
@@ -60,17 +61,25 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
                 fullscreenElements[index].remove();
             }
             this.el.setAttribute('visible', true);
-            document.querySelector('body').appendChild(this.fullscreenButton);
             this.fullscreenButton.hidden = false;
             document.querySelector('body').appendChild(this.fullscreenButton);
-            if (this.isPlaying) {
+
+            if (this.videoIsPlaying) {
                 this.playVideo();
+                this.video.className = 'clickable';
+            } else {
+                this.thumbnail.className = 'clickable';
             }
         });
 
         this.videoTarget.addEventListener('targetLost', event => {
             this.fullscreenButton.remove();
-            this.videoSrc.pause();
+            this.pauseVideo();
+
+
+            this.video.className = '';
+            this.thumbnail.className = '';
+
         });
 
         this.fullscreenButton = document.createElement('img');
@@ -149,7 +158,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
                 this.fullscreenExit.remove();
                 this.el.setAttribute('visible', true);
                 this.fullscreenButton.hidden = false;
-                this.playVideo();
+
             });
 
             this.fullscreenExit.addEventListener('pointerup', () => { this.changeSrc(this.fullscreenExit, this.fullscreenExitSrc) });
