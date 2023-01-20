@@ -153,8 +153,7 @@
     }
 
     // Request streams (audio and video), ask for permission and display streams in the video element
-    const sceneEl = document.querySelector('a-scene');
-    let cameraListInterval = setInterval(() => {
+    function listCameras() {
       MediaStreamHelper.requestStream().then(function (stream) {
         // Store Current Stream
         MediaStreamHelper._stream = stream;
@@ -168,7 +167,7 @@
             video = element;
           }
         });
-        if(video === undefined)
+        if (video === undefined)
           return;
         video.srcObject = stream;
 
@@ -187,21 +186,23 @@
                 videoSourcesSelect.appendChild(option);
                 break;
             }
-
-            if (videoSourcesSelect.options.length > 0) {
-              clearInterval(cameraListInterval);
-              videoSourcesSelect.hidden = false;
-            }
-
           });
+
+          console.log(videoSourcesSelect.options.length)
+          if (videoSourcesSelect.options.length > 0) {
+            videoSourcesSelect.hidden = false;
+          } else {
+            setTimeout(listCameras, 500);
+          }
+          
         }).catch(function (e) {
           console.log(e.name + ": " + e.message);
         });
       }).catch(function (err) {
         console.error(err);
       });
-
-    }, 500);
+    }
+    setTimeout(listCameras, 500);
 
     videoSourcesSelect.onchange = function () {
       MediaStreamHelper.requestStream().then(function (stream) {
