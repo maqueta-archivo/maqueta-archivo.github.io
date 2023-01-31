@@ -44,6 +44,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.leftArrow.style.bottom = '2%';
         this.leftArrow.style.left = '10%';
         this.leftArrow.classList.add("fullscreen");
+        this.leftArrow.classList.add("slideshow");
 
         this.leftArrow.addEventListener('click', () => { this.prevSlide(); });
 
@@ -70,6 +71,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.rightArrow.style.bottom = '2%';
         this.rightArrow.style.right = '10%';
         this.rightArrow.classList.add("fullscreen");
+        this.rightArrow.classList.add("slideshow");
 
         this.rightArrow.addEventListener('click', () => { this.nextSide(); });
 
@@ -96,6 +98,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.fullscreenButton.style.top = '2%';
         this.fullscreenButton.style.left = '2%';
         this.fullscreenButton.classList.add("fullscreen");
+        this.fullscreenButton.classList.add("slideshow");
 
         this.fullscreenButton.addEventListener("click", () => {
 
@@ -119,6 +122,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             this.fullscreenImg.style.left = '50%';
             this.fullscreenImg.style.transform = 'translate(-50%, -50%)';
             this.fullscreenImg.classList.add("fullscreen");
+            this.fullscreenImg.classList.add("slideshow");
 
             document.querySelector('body').appendChild(this.fullscreenImg);
 
@@ -137,6 +141,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             this.fullscreenExit.style.top = '2%';
             this.fullscreenExit.style.left = '2%';
             this.fullscreenExit.classList.add("fullscreen");
+            this.fullscreenExit.classList.add("slideshow");
 
             document.querySelector('body').appendChild(this.fullscreenExit);
 
@@ -168,17 +173,23 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.fullscreenButton.addEventListener("mousedown", () => { this.changeSrc(this.fullscreenButton, this.fullscreenButtonPressSrc) });
 
         this.slidesTarget.addEventListener('targetFound', event => {
+            let fullscreenSlideshowVisible = false;
             let fullscreenElements = Array.from(document.getElementsByClassName("fullscreen"));
             for (let index = 0; index < fullscreenElements.length; index++) {
-                fullscreenElements[index].remove();
+                console.log(fullscreenElements[index].classList)
+                if (!fullscreenElements[index].classList.contains("slideshow")) {
+                    fullscreenElements[index].remove();
+                } else {
+                    fullscreenSlideshowVisible = true;
+                }
             }
-            this.el.setAttribute('visible', true);
+            this.el.setAttribute('visible', !fullscreenSlideshowVisible);
             document.querySelector('body').appendChild(this.fullscreenButton);
-            this.fullscreenButton.hidden = false;
+            this.fullscreenButton.hidden = fullscreenSlideshowVisible;
             document.querySelector('body').appendChild(this.leftArrow);
-            this.leftArrow.hidden = false;
+            this.leftArrow.hidden = fullscreenSlideshowVisible;
             document.querySelector('body').appendChild(this.rightArrow);
-            this.rightArrow.hidden = false;
+            this.rightArrow.hidden = fullscreenSlideshowVisible;
         });
 
         this.slidesTarget.addEventListener('targetLost', event => {
@@ -186,7 +197,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             this.leftArrow.remove();
             this.rightArrow.remove();
         });
-        
+
         window.addEventListener("resize", () => {
             if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
                 this.rightArrow.style.height = '7%';
