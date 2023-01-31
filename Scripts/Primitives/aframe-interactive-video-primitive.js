@@ -59,7 +59,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             let fullscreenVideoVisible = false;
             var fullscreenElements = Array.from(document.getElementsByClassName("fullscreen"));
             for (let index = 0; index < fullscreenElements.length; index++) {
-                if(!fullscreenElements[index].classList.contains("interactiveVideo")){
+                if(!fullscreenElements[index].classList.contains(this.data['videoTarget'])){
                     fullscreenElements[index].remove();
                 } else {
                     fullscreenVideoVisible = true;
@@ -102,7 +102,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
         this.fullscreenButton.style.top = '2%';
         this.fullscreenButton.style.left = '2%';
         this.fullscreenButton.classList.add("fullscreen");
-        this.fullscreenButton.classList.add("interactiveVideo");
+        this.fullscreenButton.classList.add(this.data['videoTarget']);
 
         this.fullscreenButton.addEventListener("click", () => {
 
@@ -127,7 +127,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             this.fullscreenVid.style.left = '50%';
             this.fullscreenVid.style.transform = 'translate(-50%, -50%)';
             this.fullscreenVid.classList.add("fullscreen");
-            this.fullscreenVid.classList.add("interactiveVideo");
+            this.fullscreenVid.classList.add(this.data['videoTarget']);
 
             window.addEventListener("resize", () => {
                 if (document.documentElement.clientHeight > document.documentElement.clientWidth) {
@@ -156,7 +156,7 @@ AFRAME.registerComponent('a-interactive-video-nested-elements-', {
             this.fullscreenExit.style.top = '2%';
             this.fullscreenExit.style.left = '2%';
             this.fullscreenExit.classList.add("fullscreen");
-            this.fullscreenExit.classList.add("interactiveVideo");
+            this.fullscreenExit.classList.add(this.data['videoTarget']);
 
             document.querySelector('body').appendChild(this.fullscreenExit);
 

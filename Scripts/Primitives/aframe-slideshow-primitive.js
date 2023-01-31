@@ -44,7 +44,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.leftArrow.style.bottom = '2%';
         this.leftArrow.style.left = '10%';
         this.leftArrow.classList.add("fullscreen");
-        this.leftArrow.classList.add("slideshow");
+        this.leftArrow.classList.add(this.data['slidesTarget']);
 
         this.leftArrow.addEventListener('click', () => { this.prevSlide(); });
 
@@ -71,7 +71,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.rightArrow.style.bottom = '2%';
         this.rightArrow.style.right = '10%';
         this.rightArrow.classList.add("fullscreen");
-        this.rightArrow.classList.add("slideshow");
+        this.rightArrow.classList.add(this.data['slidesTarget']);
 
         this.rightArrow.addEventListener('click', () => { this.nextSide(); });
 
@@ -98,7 +98,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
         this.fullscreenButton.style.top = '2%';
         this.fullscreenButton.style.left = '2%';
         this.fullscreenButton.classList.add("fullscreen");
-        this.fullscreenButton.classList.add("slideshow");
+        this.fullscreenButton.classList.add(this.data['slidesTarget']);
 
         this.fullscreenButton.addEventListener("click", () => {
 
@@ -122,7 +122,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             this.fullscreenImg.style.left = '50%';
             this.fullscreenImg.style.transform = 'translate(-50%, -50%)';
             this.fullscreenImg.classList.add("fullscreen");
-            this.fullscreenImg.classList.add("slideshow");
+            this.fullscreenImg.classList.add(this.data['slidesTarget']);
 
             document.querySelector('body').appendChild(this.fullscreenImg);
 
@@ -141,7 +141,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             this.fullscreenExit.style.top = '2%';
             this.fullscreenExit.style.left = '2%';
             this.fullscreenExit.classList.add("fullscreen");
-            this.fullscreenExit.classList.add("slideshow");
+            this.fullscreenExit.classList.add(this.data['slidesTarget']);
 
             document.querySelector('body').appendChild(this.fullscreenExit);
 
@@ -177,7 +177,7 @@ AFRAME.registerComponent('a-slideshow-nested-elements-', {
             let fullscreenElements = Array.from(document.getElementsByClassName("fullscreen"));
             for (let index = 0; index < fullscreenElements.length; index++) {
                 console.log(fullscreenElements[index].classList)
-                if (!fullscreenElements[index].classList.contains("slideshow")) {
+                if (!fullscreenElements[index].classList.contains(this.data['slidesTarget'])) {
                     fullscreenElements[index].remove();
                 } else {
                     fullscreenSlideshowVisible = true;
